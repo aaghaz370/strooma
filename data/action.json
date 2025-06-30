@@ -1,0 +1,24 @@
+[
+  {
+    "name": "John Wick",
+    "thumbnail": "https://i.ytimg.com/vi/nAxQ01JJr5c/sddefault.jpg",
+    "video": "https://archive.org/download/sample-video",
+    "description": "Action-packed thriller",
+    "cast": "Keanu Reeves",
+    "director": "Chad Stahelski",
+    "genre": "Action",
+    "industry": "Hollywood",
+    "duration": "2h 10m"
+  },
+  {
+    "name": "Avengers",
+    "thumbnail": "https://res.cloudinary.com/jerrick/image/upload/v1569958025/5d93a8896f3dfe001ea64e94.jpg",
+    "video": "https://archive.org/download/sample-video",
+    "description": "Superhero team saves the world",
+    "cast": "Robert Downey Jr, Chris Evans",
+    "director": "Joss Whedon",
+    "genre": "Superhero",
+    "industry": "Hollywood",
+    "duration": "2h 30m"
+  }
+]

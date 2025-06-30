@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Jawan",
+    "thumbnail": "https://i.ytimg.com/vi/y_0o9OyPS2o/sddefault.jpg",
+    "q480": "assets/videos/jawan_480.mp4",
+    "q720": "assets/videos/jawan_720.mp4",
+    "q1080": "assets/videos/jawan_1080.mp4",
+    "cast": "Shahrukh Khan, Nayanthara",
+    "director": "Atlee",
+    "genre": "Action, Thriller",
+    "industry": "Bollywood",
+    "duration": "2h 45min",
+    "description": "An ex-army man sets out to fight corruption."
+  },
+  {
+    "name": "Pushpa",
+    "thumbnail": "assets/thumbnails/pushpa.jpg",
+    "q480": "assets/videos/pushpa_480.mp4",
+    "q720": "assets/videos/pushpa_720.mp4",
+    "q1080": "assets/videos/pushpa_1080.mp4",
+    "cast": "Allu Arjun, Rashmika Mandanna",
+    "director": "Sukumar",
+    "genre": "Action, Drama",
+    "industry": "Tollywood",
+    "duration": "2h 58min",
+    "description": "Pushpa rises through the red sandalwood smuggling world."
+  }
+]

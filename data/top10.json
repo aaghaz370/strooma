@@ -1,52 +1,24 @@
 [
   {
-    "name": "Pathaan",
-    "thumbnail": "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSL39ByyiEdY1g4naGjTPMz05-DXx_BR8aATaefHWKMo016qH0UvTh8CdAa6m0erp_j2zES496Wq2zxvbo4P3h-NO-CkrjYon-Ni2pXbUCNNw",
-    "video": "https://archive.org/download/pathaan-hd"
-  },
-  {
     "name": "Jawan",
-    "thumbnail": "https://miro.medium.com/v2/resize:fit:1200/1*XY-9pKHSByT6Wp4Gi-jO-g.jpeg",
-    "video": "https://archive.org/download/jawan-full-hd"
-  },
-  {
-    "name": "Animal",
-    "thumbnail": "https://indiaglitz-media.s3.amazonaws.com/telugu/home/leo-movie-review-1.jpg",
-    "video": "https://archive.org/download/animal-hd"
+    "thumbnail": "https://thecelebrays.com/wp-content/uploads/2024/05/Jawan.webp",
+    "videoBase": "https://archive.org/download/jawan-hd",
+    "duration": "2h 45min",
+    "description": "Shahrukh Khan action thriller.",
+    "cast": "SRK, Nayanthara",
+    "director": "Atlee",
+    "genre": "Action, Thriller",
+    "industry": "Bollywood"
   },
   {
     "name": "Pushpa",
-    "thumbnail": "thumbnails/pushpa.jpg",
-    "video": "https://archive.org/download/pushpa-full"
-  },
-  {
-    "name": "KGF Chapter 2",
-    "thumbnail": "thumbnails/kgf2.jpg",
-    "video": "https://archive.org/download/kgf2-full"
-  },
-  {
-    "name": "Gadar 2",
-    "thumbnail": "thumbnails/gadar2.jpg",
-    "video": "https://archive.org/download/gadar2-full"
-  },
-  {
-    "name": "Baahubali 2",
-    "thumbnail": "thumbnails/baahubali2.jpg",
-    "video": "https://archive.org/download/baahubali2-full"
-  },
-  {
-    "name": "RRR",
-    "thumbnail": "thumbnails/rrr.jpg",
-    "video": "https://archive.org/download/rrr-full"
-  },
-  {
-    "name": "Drishyam 2",
-    "thumbnail": "thumbnails/drishyam2.jpg",
-    "video": "https://archive.org/download/drishyam2-full"
-  },
-  {
-    "name": "Vikram",
-    "thumbnail": "thumbnails/vikram.jpg",
-    "video": "https://archive.org/download/vikram-full"
+    "thumbnail": "https://images.moneycontrol.com/static-mcnews/2024/02/Pushpa-The-Rise-1.jpg",
+    "videoBase": "https://archive.org/download/pushpa-hd",
+    "duration": "2h 50min",
+    "description": "Rise of Pushpa Raj.",
+    "cast": "Allu Arjun",
+    "director": "Sukumar",
+    "genre": "Action",
+    "industry": "Tollywood"
   }
 ]

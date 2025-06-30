@@ -38,19 +38,40 @@
       </div>
     </div>
 
-    <!-- Top 10 Section -->
-    <section class="category">
-      <h2>Top 10</h2>
-      <div class="scroll-container">
-        <button class="scroll-left">←</button>
-        <div class="movie-row" id="top10"></div>
-        <button class="scroll-right">→</button>
-      </div>
-    </section>
+    <!-- top 10 section -->
+   <section class="top10-section">
+  <h2>Top 10</h2>
+  <div class="top10-scroll-container">
+    <button class="top10-scroll-left">←</button>
+    <div class="top10-movie-row" id="top10-row"></div>
+    <button class="top10-scroll-right">→</button>
+  </div>
+</section>
+
+<!-- Popup Dynamic Detail -->
+<div class="top10-popup hidden" id="top10-popup">
+  <div class="top10-popup-bg"></div>
+  <div class="top10-popup-content">
+    <img id="top10-popup-img" src="" alt="Movie">
+    <button id="top10-popup-close">×</button>
+    <h3 id="top10-popup-title"></h3>
+    <div class="top10-popup-actions">
+      <button id="top10-popup-like">❤️ Like</button>
+      <span id="top10-popup-duration"></span>
+      <button id="top10-popup-play">▶️ Play</button>
+    </div>
+    <p id="top10-popup-desc"></p>
+    <div id="top10-popup-details"></div>
+  </div>
+</div>
+
+
 
     <!-- Dynamic Categories -->
     <div id="categories-container"></div>
   </div>
+
+
 
   <script src="script.js"></script>
 </body>
