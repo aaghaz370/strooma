@@ -169,7 +169,7 @@ document.querySelectorAll('.scroll-container').forEach(section => {
   };
 });
 
-
+// category
 const categories = [
   'action', 'comedy', 'drama', 'romance', 'thriller', 'sci-fi', 'horror', 'animation',
   'mystery', 'crime', 'fantasy', 'biography', 'documentary', 'family', 'adventure',
@@ -184,9 +184,9 @@ categories.forEach(category => {
   section.innerHTML = `
     <h2>${category.toUpperCase()}</h2>
     <div class="scroll-container">
-      <button class="scroll-left">←</button>
+      <button class="scroll-left">❮</button>
       <div class="movie-row" id="${category}"></div>
-      <button class="scroll-right">→</button>
+      <button class="scroll-right">❯</button>
     </div>`;
   container.appendChild(section);
 
@@ -278,3 +278,4 @@ input.addEventListener("input", () => {
     }
   }, 400);
 });
+

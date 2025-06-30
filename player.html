@@ -1,0 +1,8 @@
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const video = urlParams.get('video');
+  if (video) {
+    document.getElementById("video-source").src = video;
+    document.getElementById("video-player").load();
+  }
+</script>

@@ -71,7 +71,7 @@ a {
   z-index: 1;
 }
 
-/* Search Overlay */
+
 #search-overlay {
   position: fixed;
   inset: 0;
@@ -133,6 +133,8 @@ a {
   border-radius: 5px;
   cursor: pointer;
 }
+ 
+
 
 /* Top 10 Unique Section */
 .top10-section {
@@ -243,7 +245,7 @@ a {
   position: absolute;
   top: 15px;
   right: 15px;
-  background: #e50914;
+  background:rgba(0, 0, 0, 0.6);
   border: none;
   color: white;
   font-size: 20px;

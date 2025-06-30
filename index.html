@@ -37,14 +37,17 @@
         <div id="search-results" class="results-grid"></div>
       </div>
     </div>
+    
+
+
 
     <!-- top 10 section -->
    <section class="top10-section">
   <h2>Top 10</h2>
   <div class="top10-scroll-container">
-    <button class="top10-scroll-left">←</button>
+    <button class="top10-scroll-left">❮</button>
     <div class="top10-movie-row" id="top10-row"></div>
-    <button class="top10-scroll-right">→</button>
+    <button class="top10-scroll-right">❯</button>
   </div>
 </section>
 
@@ -56,14 +59,189 @@
     <button id="top10-popup-close">×</button>
     <h3 id="top10-popup-title"></h3>
     <div class="top10-popup-actions">
-      <button id="top10-popup-like">❤️ Like</button>
+      <button id="top10-popup-like">♥ Like</button>
       <span id="top10-popup-duration"></span>
-      <button id="top10-popup-play">▶️ Play</button>
+      <button id="top10-popup-play">► Play</button>
     </div>
     <p id="top10-popup-desc"></p>
     <div id="top10-popup-details"></div>
   </div>
 </div>
+
+
+<!-- Top 10 Series Section -->
+<section class="top10-series-section">
+  <h2>Top 10 Series</h2>
+  <div class="top10-scroll-container">
+    <button class="top10-scroll-left">❮</button>
+    <div class="top10-movie-row" id="top10-series-row"></div>
+    <button class="top10-scroll-right">❯</button>
+  </div>
+</section>
+
+<!-- Popup Dynamic Detail -->
+<div class="top10-popup hidden" id="top10-series-popup">
+  <div class="top10-popup-bg"></div>
+  <div class="top10-popup-content">
+    <img id="series-popup-img" src="" alt="Series">
+    <!-- <button id="series-popup-close">×</button> -->
+     <button id="series-popup-close"
+  style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 10000;
+  "
+>
+  ×
+</button>
+
+    <h3 id="series-popup-title"></h3>
+    <div class="top10-popup-actions">
+      <button id="series-popup-like">♥ Like</button>
+      <span id="series-popup-duration"></span>
+      <select id="series-season-select"></select>
+    </div>
+    <div id="series-episodes"></div>
+    <p id="series-popup-desc"></p>
+    <div id="series-popup-details"></div>
+  </div>
+</div>
+
+<style>
+  /* Use same CSS from movies for visual polish */
+  
+  .top10-series-section h2 {
+    padding-left: 20px;
+    margin-bottom: 10px;
+    font-size: 22px;
+  }
+  .top10-series-section .top10-movie-box {
+    width: 180px;
+    height: 90px;
+  }
+  #series-episodes {
+    margin: 10px 0;
+  }
+  .episode-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    font-size: 14px;
+  }
+  .episode-item img {
+    width: 60px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .episode-meta {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    align-items: center;
+  }
+</style>
+
+<script>
+const seriesRow = document.getElementById("top10-series-row");
+const seriesPopup = document.getElementById("top10-series-popup");
+const seriesImg = document.getElementById("series-popup-img");
+const seriesTitle = document.getElementById("series-popup-title");
+const seriesDesc = document.getElementById("series-popup-desc");
+const seriesDetails = document.getElementById("series-popup-details");
+const seriesClose = document.getElementById("series-popup-close");
+const seriesDuration = document.getElementById("series-popup-duration");
+const seasonSelect = document.getElementById("series-season-select");
+const episodesContainer = document.getElementById("series-episodes");
+
+// Fetch Series
+fetch("data/top10series.json")
+  .then(res => res.json())
+  .then(seriesList => {
+    seriesList.slice(0, 10).forEach((series, i) => {
+      const box = document.createElement("div");
+      box.className = "top10-movie-box";
+      box.innerHTML = `
+        <img src="${series.thumbnail}" alt="${series.name}">
+        <div class="top10-number">${i + 1}</div>
+      `;
+      box.onclick = () => openSeriesPopup(series);
+      seriesRow.appendChild(box);
+    });
+  });
+
+function openSeriesPopup(series) {
+  seriesImg.src = series.thumbnail;
+  seriesTitle.textContent = series.name;
+  seriesDesc.textContent = series.description || "No description.";
+  seriesDuration.textContent = series.duration || "N/A";
+  seriesDetails.innerHTML = `
+    <p><b>Cast:</b> ${series.cast || "Unknown"}</p>
+    <p><b>Director:</b> ${series.director || "Unknown"}</p>
+    <p><b>Genre:</b> ${series.genre || "Unknown"}</p>
+    <p><b>Industry:</b> ${series.industry || "Unknown"}</p>
+  `;
+
+  // Populate season select
+  seasonSelect.innerHTML = "";
+  series.seasons.forEach((s, idx) => {
+    const option = document.createElement("option");
+    option.value = idx;
+    option.textContent = `Season ${s.season}`;
+    seasonSelect.appendChild(option);
+  });
+  seasonSelect.selectedIndex = series.seasons.length - 1;
+  renderEpisodes(series.seasons[seasonSelect.selectedIndex].episodes);
+
+  seasonSelect.onchange = () => {
+    const season = series.seasons[seasonSelect.value];
+    renderEpisodes(season.episodes);
+  };
+
+  seriesPopup.classList.remove("hidden");
+}
+
+function renderEpisodes(episodes) {
+  episodesContainer.innerHTML = "";
+  episodes.forEach(ep => {
+    const item = document.createElement("div");
+    item.className = "episode-item";
+    item.innerHTML = `
+      <img src="${ep.thumbnail}" alt="${ep.title}" onclick="window.location.href='player.html?video=${encodeURIComponent(ep.videoBase)}'">
+      <div class="episode-meta">
+        <span>${ep.title}</span>
+        <span>${ep.duration}</span>
+      </div>
+    `;
+    episodesContainer.appendChild(item);
+  });
+}
+
+seriesClose.onclick = () => seriesPopup.classList.add("hidden");
+seriesPopup.querySelector(".top10-popup-bg").onclick = () => seriesPopup.classList.add("hidden");
+
+// Scroll Buttons
+const sLeftBtn = document.querySelector(".top10-series-section .top10-scroll-left");
+const sRightBtn = document.querySelector(".top10-series-section .top10-scroll-right");
+
+sLeftBtn.onclick = () => {
+  seriesRow.scrollBy({ left: -seriesRow.clientWidth, behavior: 'smooth' });
+};
+sRightBtn.onclick = () => {
+  seriesRow.scrollBy({ left: seriesRow.clientWidth, behavior: 'smooth' });
+};
+</script>
 
 
 

@@ -1,6 +1,7 @@
 [
   {
     "name": "John Wick",
+    "type": "movie",
     "thumbnail": "https://i.ytimg.com/vi/nAxQ01JJr5c/sddefault.jpg",
     "video": "https://archive.org/download/sample-video",
     "description": "Action-packed thriller",
@@ -12,6 +13,7 @@
   },
   {
     "name": "Avengers",
+    "type": "movie",
     "thumbnail": "https://res.cloudinary.com/jerrick/image/upload/v1569958025/5d93a8896f3dfe001ea64e94.jpg",
     "video": "https://archive.org/download/sample-video",
     "description": "Superhero team saves the world",
