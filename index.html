@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strroma</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Hero Banner with Header Elements Overlaid -->
+    <section class="hero-slider">
+      <div class="slider-wrapper" id="slider-wrapper">
+        <!-- Hero Slides Inserted via JS -->
+      </div>
+      <div class="slider-controls">
+        <button class="prev-slide">❮</button>
+        <button class="next-slide">❯</button>
+      </div>
+      <!-- Overlayed Top Bar -->
+      <div class="hero-top-bar">
+        <button id="search-toggle" class="icon-btn">🔍</button>
+        <button id="theme-toggle" class="icon-btn">🌙</button>
+      </div>
+    </section>
+
+    <!-- Search Overlay -->
+    <div id="search-overlay" class="hidden">
+      <div class="overlay-bg"></div>
+      <div class="search-box">
+        <button id="close-search" class="icon-btn close-btn">×</button>
+        <input type="text" id="search-input" placeholder="Search for movies..." autofocus />
+        <div id="loading" class="hidden">
+          <img src="assets/loading.gif" alt="Loading..." />
+        </div>
+        <div id="search-results" class="results-grid"></div>
+      </div>
+    </div>
+
+    <!-- Top 10 Section -->
+    <section class="category">
+      <h2>Top 10</h2>
+      <div class="scroll-container">
+        <button class="scroll-left">←</button>
+        <div class="movie-row" id="top10"></div>
+        <button class="scroll-right">→</button>
+      </div>
+    </section>
+
+    <!-- Dynamic Categories -->
+    <div id="categories-container"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

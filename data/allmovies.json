@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Pathaan",
+    "thumbnail": "https://www.roundtableindia.co.in/wp-content/uploads/2017/05/bahubali_poster.jpg",
+    "video": "https://archive.org/download/pathaan-hd"
+  },
+  {
+    "name": "Jawan",
+    "thumbnail": "thumbnails/jawan.jpg",
+    "video": "https://archive.org/download/jawan-full-hd"
+  },
+  {
+    "name": "Animal",
+    "thumbnail": "thumbnails/animal.jpg",
+    "video": "https://archive.org/download/animal-hd"
+  },
+  {
+    "name": "Pushpa",
+    "thumbnail": "thumbnails/pushpa.jpg",
+    "video": "https://archive.org/download/pushpa-full"
+  },
+  {
+    "name": "KGF Chapter 2",
+    "thumbnail": "thumbnails/kgf2.jpg",
+    "video": "https://archive.org/download/kgf2-full"
+  },
+  {
+    "name": "Gadar 2",
+    "thumbnail": "thumbnails/gadar2.jpg",
+    "video": "https://archive.org/download/gadar2-full"
+  },
+  {
+    "name": "RRR",
+    "thumbnail": "thumbnails/rrr.jpg",
+    "video": "https://archive.org/download/rrr-full"
+  },
+  {
+    "name": "Drishyam 2",
+    "thumbnail": "thumbnails/drishyam2.jpg",
+    "video": "https://archive.org/download/drishyam2-full"
+  },
+  {
+    "name": "Vikram",
+    "thumbnail": "thumbnails/vikram.jpg",
+    "video": "https://archive.org/download/vikram-full"
+  },
+  {
+    "name": "Baahubali 2",
+    "thumbnail": "thumbnails/baahubali2.jpg",
+    "video": "https://archive.org/download/baahubali2-full"
+  },
+  {
+    "name": "War",
+    "thumbnail": "thumbnails/war.jpg",
+    "video": "https://archive.org/download/war-full"
+  },
+  {
+    "name": "Sultan",
+    "thumbnail": "thumbnails/sultan.jpg",
+    "video": "https://archive.org/download/sultan-full"
+  }
+]
