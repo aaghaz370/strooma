@@ -167,7 +167,7 @@ a {
   position: relative;
   flex-shrink: 0;
   width: 150px;
-  height: 290px;
+  height: auto;
   cursor: pointer;
 }
 .top10-movie-box img {
