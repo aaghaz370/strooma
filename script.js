@@ -131,6 +131,7 @@ function openTop10Popup(movie) {
     <p><b>Director:</b> ${movie.director || "Unknown"}</p>
     <p><b>Genre:</b> ${movie.genre || "Unknown"}</p>
     <p><b>Industry:</b> ${movie.industry || "Unknown"}</p>
+    <p><b>IMDB:</b> ${movie.imdb || "Unknown"}</p>
   `;
 
   popupPlay.onclick = () => {
@@ -232,6 +233,7 @@ function showDynamicPage(movie) {
         <tr><td><b>Director:</b></td><td>${movie.director || 'N/A'}</td></tr>
         <tr><td><b>Genre:</b></td><td>${movie.genre || 'N/A'}</td></tr>
         <tr><td><b>Industry:</b></td><td>${movie.industry || 'N/A'}</td></tr>
+        <tr><td><b>Imdb:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
       </table>
     </div>
   `;
