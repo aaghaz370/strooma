@@ -171,9 +171,9 @@ document.querySelectorAll('.scroll-container').forEach(section => {
 
 // category
 const categories = [
-  'action', 'comedy', 'drama', 'romance', 'thriller', 'sci-fi', 'horror', 'animation',
-  'mystery', 'crime', 'fantasy', 'biography', 'documentary', 'family', 'adventure',
-  'history', 'music', 'sports', 'war'
+  'Latest Releases','Popular Indian movies', 'Hindi classic movies', 'Tv Sci-Fi & Fantasy', 'Anime & Anime-inspired', 'Hollywood movies', 'Kids Shows', 'Love Stories', 'Popular in Documentary',
+  'Hall of Fame', 'Entertainment All-Rounders', 'Watch with Kids', 'Hidden Gems', 'Inspiring movies', 'Action & Adventure', 'Young adult movies',
+  'Top-rated movies on IMDB', 'Horror movies', 'Korean romantic movies', 'Mystry & thriller movies'
 ];
 
 const container = document.getElementById('categories-container');
