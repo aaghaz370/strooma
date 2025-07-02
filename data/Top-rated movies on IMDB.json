@@ -35,6 +35,18 @@
     "industry": "Hollywood",
     "imdb": "8.6"
   },
+   {
+  "name": "Aparichit (Anniyan)",
+  "thumbnail": "https://akamaividz2.zee5.com/image/upload/w_480,h_270,c_scale,f_webp,q_auto:eco/resources/0-0-aparichitthestranger/list/aparichitthestranger1170x6172521482252e29415a617453daf9d3b389b201931.jpg",
+  "videoBase": "https://archive.org/download/aparichit-anniyan-2005",
+  "duration": "3h 1min",
+  "description": "A righteous but frustrated lawyer develops multiple personalities to fight corruption and injustice in society, triggering a series of violent events.",
+  "cast": "Vikram, Sadha, Prakash Raj, Vivek",
+  "director": "S. Shankar",
+  "genre": "Psychological Thriller, Action, Drama",
+  "industry": "Kollywood",
+  "imdb": "8.3"
+},
   {
     "name": "Memento",
     "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/a45dd4a04565389aa9e539901a933a7baa1518164b8f51c43f9d9fdadde163bc.jpg",
@@ -97,7 +109,7 @@
   },
   {
     "name": "Jurassic Park",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg",
+    "thumbnail": "https://is1-ssl.mzstatic.com/image/thumb/iiMyThWsK4QkC82JmP2z1g/1200x675.jpg",
     "videoBase": "https://archive.org/download/jurassic-park-1993",
     "duration": "2h 7min",
     "description": "A theme park suffers a major power breakdown, unleashing genetically-engineered dinosaurs on its visitors.",
@@ -109,7 +121,7 @@
   },
   {
     "name": "Shutter Island",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/7/76/Shutterislandposter.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVFaO4ma-FpvKKfDuD8sWPJU3zxxVj_PwbNw&s",
     "videoBase": "https://archive.org/download/shutter-island-2010",
     "duration": "2h 18min",
     "description": "A U.S. Marshal investigates a psychiatric facility and uncovers disturbing secrets about himself.",
@@ -121,7 +133,7 @@
   },
   {
     "name": "Batman Begins",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/a/af/Batman_Begins_Poster.jpg",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/aaf94ab356cccbb00cfcd061b85786dc353c4ca71ed99284ddeabe61a2e8d00f.jpg",
     "videoBase": "https://archive.org/download/batman-begins-2005",
     "duration": "2h 20min",
     "description": "After training abroad, Bruce Wayne returns to Gotham to become the vigilante known as Batman.",
@@ -133,7 +145,7 @@
   },
   {
     "name": "Demon Slayer: Mugen Train",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/21/Demon_Slayer_Mugen_Train_Poster.jpg",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/d0521a3afa224bbd4da9a32db99f72af6fba2070d2d7b4f21cc20a725b950cd5.jpg",
     "videoBase": "https://archive.org/download/demon-slayer-mugen-train-2020",
     "duration": "1h 57min",
     "description": "Tanjiro and his companions face a powerful demon on a train, risking their lives in an epic battle.",
@@ -145,7 +157,7 @@
   },
   {
     "name": "Jaws",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/eb/Jaws_(movie_poster).jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCQeu10QU6X7-xoo6lnoE97dnLcaryTGxUBQ&s",
     "videoBase": "https://archive.org/download/jaws-1975",
     "duration": "2h 4min",
     "description": "A giant man-eating shark terrorizes a beach town, prompting a deadly hunt by three men.",
@@ -157,7 +169,7 @@
   },
   {
     "name": "Ford v Ferrari",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/34/Ford_v_Ferrari_poster.jpg",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/9cff7db8df4c6dca8e6c2a341ccec1868ef98a94cafd786cf2bc1b7d76f36715.jpg",
     "videoBase": "https://archive.org/download/ford-v-ferrari-2019",
     "duration": "2h 32min",
     "description": "American car designer Carroll Shelby and driver Ken Miles battle corporate interference and race to beat Ferrari at Le Mans.",
@@ -169,7 +181,7 @@
   },
   {
     "name": "Pirates of the Caribbean: The Curse of the Black Pearl",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/4/4e/Pirates_of_the_Caribbean_-_The_Curse_of_the_Black_Pearl.png",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/31e0bbe5131146685d108f494b19c3ab32a3b53497894165a7a421eb73460d57.jpg",
     "videoBase": "https://archive.org/download/pirates-black-pearl-2003",
     "duration": "2h 23min",
     "description": "Captain Jack Sparrow teams up with unlikely allies to stop cursed pirates who turn into skeletons at moonlight.",
@@ -181,7 +193,7 @@
   },
   {
     "name": "The Shawshank Redemption",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/8/81/ShawshankRedemptionMoviePoster.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGW2qwTdrk1f3en-qqPCu7PyoIVZZktkJfrw&s",
     "videoBase": "https://archive.org/download/shawshank-redemption-1994",
     "duration": "2h 22min",
     "description": "Framed for murder, a man forms a life-changing friendship behind bars while fighting to reclaim his freedom.",
@@ -193,7 +205,7 @@
   },
   {
     "name": "The Godfather",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/1/1c/Godfather_ver1.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTyw52lWSbRQVT3rZs-FEj8t29wA-S0aKFdpw&s",
     "videoBase": "https://archive.org/download/the-godfather-1972",
     "duration": "2h 55min",
     "description": "The aging patriarch of an organized crime dynasty transfers control to his reluctant son in this iconic saga.",
@@ -205,7 +217,7 @@
   },
   {
     "name": "The Dark Knight",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/8/8a/Dark_Knight.jpg",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/338a7d1850e45f4e63f1997f01ddbdb5ab3141f06bd518fe4395c751498f4a18.jpg",
     "videoBase": "https://archive.org/download/the-dark-knight-2008",
     "duration": "2h 32min",
     "description": "Batman faces the Joker, a criminal mastermind who unleashes chaos on Gotham and tests the hero’s morals.",
@@ -217,7 +229,7 @@
   },
   {
     "name": "The Lord of the Rings: The Two Towers",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/a/ad/Lord_of_the_Rings_-_The_Two_Towers.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoP2P84wRrVtBO3ohXJ4NeV3S3yL_IEPSbZQ&s",
     "videoBase": "https://archive.org/download/lotr-two-towers-2002",
     "duration": "2h 59min",
     "description": "As Frodo and Sam move closer to Mordor, Aragorn and his allies fight off Sauron’s forces in epic battles.",
@@ -229,7 +241,7 @@
   },
   {
     "name": "Dune: Part Two",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/5/5e/Dune_Part_Two_poster.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxbc_xEWiYJUI9KN8Ojqb-XFnH-R083tuSlw&s",
     "videoBase": "https://archive.org/download/dune-part-two-2024",
     "duration": "2h 46min",
     "description": "Paul Atreides unites with the Fremen and rises to fulfill his destiny while waging war on the Harkonnens.",
@@ -241,7 +253,7 @@
   },
   {
     "name": "Drishyam",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/e/e0/Drishyam_2015_poster.jpg",
+    "thumbnail": "https://s3images.zee5.com/wp-content/uploads/sites/7/2021/05/Untitled-design-2021-05-06T152341.361.png",
     "videoBase": "https://archive.org/download/drishyam-2015",
     "duration": "2h 43min",
     "description": "A devoted father covers up a crime to protect his family in a twisting thriller about truth, deception, and sacrifice.",
@@ -253,7 +265,7 @@
   },
   {
     "name": "Dil Chahta Hai",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/27/Dil_Chahta_Hai.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRcYEgCLKA7SodIxIgcSCQyUL2OufkKpCZCg&s",
     "videoBase": "https://archive.org/download/dil-chahta-hai-2001",
     "duration": "3h 3min",
     "description": "Three close friends navigate the challenges of adulthood, friendship, and love in this modern coming-of-age story.",
@@ -264,20 +276,20 @@
     "imdb": "8.1"
   },
   {
-    "name": "3 Idiots",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/d/df/3_idiots_poster.jpg",
-    "videoBase": "https://archive.org/download/3-idiots-2009",
-    "duration": "2h 51min",
-    "description": "Three friends navigate India's rigid education system while one of them questions traditional learning methods.",
-    "cast": "Aamir Khan, R. Madhavan, Sharman Joshi",
-    "director": "Rajkumar Hirani",
-    "genre": "Comedy, Drama",
-    "industry": "Bollywood",
-    "imdb": "8.4"
-  },
+  "name": "Vada Chennai",
+  "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/8d367f604583769a6c8823a3f98b9ed004afb932ee435fa66f0efd9ab6d35b11.jpg",
+  "videoBase": "https://archive.org/download/vada-chennai-2018",
+  "duration": "2h 44min",
+  "description": "A talented carrom player from North Chennai is unwillingly drawn into the web of gang wars, crime, and politics over decades.",
+  "cast": "Dhanush, Ameer, Andrea Jeremiah, Samuthirakani",
+  "director": "Vetrimaaran",
+  "genre": "Crime, Drama, Action",
+  "industry": "Kollywood",
+  "imdb": "8.5"
+},
   {
     "name": "Asuran",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/1/1a/Asuran_poster.jpg",
+    "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdTWbfiXDG4qBjX_Hm8_4QQupa7AYMXWZ0PQ&s",
     "videoBase": "https://archive.org/download/asuran-2019",
     "duration": "2h 20min",
     "description": "A farmer turns into a fierce protector when his family is threatened, revealing dark truths about caste injustice.",
@@ -288,20 +300,20 @@
     "imdb": "8.4"
   },
   {
-    "name": "The Lunchbox",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/0/0b/The_Lunchbox_poster.jpg",
-    "videoBase": "https://archive.org/download/the-lunchbox-2013",
-    "duration": "1h 45min",
-    "description": "A wrongly delivered lunchbox connects a lonely man and a neglected housewife in Mumbai, sparking a tender bond.",
-    "cast": "Irrfan Khan, Nimrat Kaur",
-    "director": "Ritesh Batra",
-    "genre": "Drama, Romance",
-    "industry": "Bollywood",
-    "imdb": "7.8"
-  },
+  "name": "S/O Satyamurthy",
+  "thumbnail": "https://m.media-amazon.com/images/M/MV5BY2Y0ODliZDctOWVhZi00NGNmLWE0M2UtZjE4ODNiNGNkZTA1XkEyXkFqcGc@._V1_.jpg",
+  "videoBase": "https://archive.org/download/son-of-satyamurthy-2015",
+  "duration": "2h 42min",
+  "description": "After his father’s sudden death, Viraj must clear his family’s debts and reclaim their dignity, using heart, brain, and brawn to win respect, love, and legacy.",
+  "cast": "Allu Arjun, Samantha Ruth Prabhu, Upendra, Nithya Menen",
+  "director": "Trivikram Srinivas",
+  "genre": "Drama, Family, Action",
+  "industry": "Tollywood",
+  "imdb": "7.1"
+},
   {
     "name": "Article 15",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/d/dd/Article_15_poster.jpg",
+    "thumbnail": "https://imgcdn.media/poster/341/81154455.jpg",
     "videoBase": "https://archive.org/download/article-15-2019",
     "duration": "2h 10min",
     "description": "Inspired by real events, a police officer uncovers deep caste-based injustices in rural India.",
@@ -312,41 +324,30 @@
     "imdb": "8.1"
   },
   {
-    "name": "Udaan",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/2/2e/Udaan-poster.jpg",
-    "videoBase": "https://archive.org/download/udaan-2010",
-    "duration": "2h 14min",
-    "description": "A teenage boy returns home from boarding school and struggles with his abusive father while chasing his dream.",
-    "cast": "Rajat Barmecha, Ronit Roy",
-    "director": "Vikramaditya Motwane",
-    "genre": "Drama",
-    "industry": "Bollywood",
-    "imdb": "8.2"
-  },
+  "name": "Karnan",
+  "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/d75f97947477dbff789d72f51d700b4ff03213a7e9d7ede0a880bc12968a3c3c.jpg",
+  "videoBase": "https://archive.org/download/karnan-2021",
+  "duration": "2h 39min",
+  "description": "A fearless young man from a rural village rises against systemic oppression and police brutality, leading a revolt to protect his people.",
+  "cast": "Dhanush, Lal, Rajisha Vijayan",
+  "director": "Mari Selvaraj",
+  "genre": "Action, Drama, Social",
+  "industry": "Kollywood",
+  "imdb": "8.1"
+},
   {
-    "name": "Tamasha",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/3/38/Tamasha_%28film%29_poster.jpg",
-    "videoBase": "https://archive.org/download/tamasha-2015",
-    "duration": "2h 19min",
-    "description": "Two people meet in Corsica, pretending to be strangers, but reality and emotional trauma soon catch up with them.",
-    "cast": "Ranbir Kapoor, Deepika Padukone",
-    "director": "Imtiaz Ali",
-    "genre": "Drama, Romance",
-    "industry": "Bollywood",
-    "imdb": "7.3"
-  },
-  {
-    "name": "The Man from Earth",
-    "thumbnail": "https://upload.wikimedia.org/wikipedia/en/f/f0/The_Man_from_Earth_poster.jpg",
-    "videoBase": "https://archive.org/download/the-man-from-earth-2007",
-    "duration": "1h 27min",
-    "description": "A college professor reveals to his friends that he is a 14,000-year-old immortal, sparking an intellectual debate.",
-    "cast": "David Lee Smith, Tony Todd",
-    "director": "Richard Schenkman",
-    "genre": "Drama, Sci-Fi",
-    "industry": "Hollywood",
-    "imdb": "7.9"
-  }
+  "name": "Dragon",
+  "thumbnail": "https://imgcdn.media/poster/h/81762715.jpg",
+  "videoBase": "https://archive.org/download/dragon-2025",
+  "duration": "2h 35min",
+  "description": "A college dropout spirals into financial fraud and self-destruction after heartbreak, only to face redemption on his own terms in this stylish coming‑of‑age drama.",
+  "cast": "Pradeep Ranganathan, Anupama Parameswaran, Kayadu Lohar",
+  "director": "Ashwath Marimuthu",
+  "genre": "Drama, Comedy, Coming‑of‑Age",
+  "industry": "Kollywood",
+  "imdb": "8.3"
+}
+
 ]
 
 
