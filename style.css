@@ -72,7 +72,7 @@ a {
 }
 
 
-#search-overlay {
+/* #search-overlay {
   position: fixed;
   inset: 0;
   z-index: 2000;
@@ -132,8 +132,123 @@ a {
   object-fit: cover;
   border-radius: 5px;
   cursor: pointer;
+} */
+ #search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: none;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(6px);
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
 }
- 
+#search-overlay.active {
+  display: flex;
+  flex-direction: column;
+}
+
+.search-box {
+  position: relative;
+  max-width: 90%;
+  width: 600px;
+  margin: 0 auto;
+}
+
+#search-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.close-btn {
+  position: absolute;
+  top: -35px;
+  right: 0;
+  font-size: 24px;
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#search-results img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dynamic-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.dynamic-content {
+  background: #111;
+  color: white;
+  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  border-radius: 8px;
+  position: relative;
+}
+
+.dynamic-content img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.dynamic-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.dynamic-actions button {
+  padding: 6px 12px;
+  font-size: 14px;
+  background: #e50914;
+  border: none;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.details-table {
+  width: 100%;
+  margin-top: 10px;
+  color: #ccc;
+  font-size: 14px;
+}
+
+.details-table td {
+  padding: 4px;
+}
+
+
 
 
 /* Top 10 Unique Section */
@@ -437,4 +552,40 @@ a {
   .scroll-right {
     display: none;
   }
+}
+
+#episode-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.episode-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.05);
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.episode-item img {
+  width: 80px;
+  height: 45px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.episode-item span {
+  color: white;
+  font-size: 14px;
+}
+
+#season-selector {
+  margin-left: 10px;
+  padding: 4px;
+  border-radius: 4px;
+  font-size: 14px;
 }

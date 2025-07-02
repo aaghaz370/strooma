@@ -1,0 +1,108 @@
+[
+  {
+    "name": "Dark",
+    "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+    "description": "A time-travel mystery across generations.",
+    "duration": "3 Seasons",
+    "cast": "Louis Hofmann, Lisa Vicari",
+    "director": "Baran bo Odar",
+    "genre": "Sci-Fi, Mystery",
+    "industry": "German",
+    "seasons": [
+      {
+        "season": 1,
+        "episodes": [
+          {
+            "title": "Secrets",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "52 min",
+            "videoBase": "videos/dark/s1e1.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          }
+        ]
+      },
+      {
+        "season": 2,
+        "episodes": [
+          {
+            "title": "Beginnings and Endings",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "55 min",
+            "videoBase": "videos/dark/s2e1.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          },
+          {
+            "title": "Lies",
+            "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
+            "duration": "54 min",
+            "videoBase": "videos/dark/s1e2.mp4"
+          }
+        ]
+      }
+    ]
+  }
+]
