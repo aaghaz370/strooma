@@ -174,7 +174,7 @@ document.querySelectorAll('.scroll-container').forEach(section => {
 const categories = [
   'Latest Releases','Popular Indian movies', 'Hindi classic movies', 'Tv Sci-Fi & Fantasy', 'Anime & Anime-inspired', 'Hollywood movies', 'Kids Shows', 'Love Stories', 'Popular in Documentary',
   'Hall of Fame', 'Entertainment All-Rounders', 'Watch with Kids', 'Hidden Gems', 'Inspiring movies', 'Action & Adventure', 'Young adult movies',
-  'Top-rated movies on IMDB', 'Horror movies', 'Korean Rom-Com movies', 'Mystry & thriller movies'
+  'Top-rated movies on IMDB','Avengers Movie Universe', 'Horror movies', 'Korean Rom-Com movies', 'Mystry & thriller movies'
 ];
 
 const container = document.getElementById('categories-container');
