@@ -83,12 +83,12 @@
   </div>
 </section>
 
-<!-- Popup Dynamic Detail -->
+
 <div class="top10-popup hidden" id="top10-series-popup">
   <div class="top10-popup-bg"></div>
   <div class="top10-popup-content">
     <img id="series-popup-img" src="" alt="Series">
-    <!-- <button id="series-popup-close">×</button> -->
+   
      <button id="series-popup-close"
   style="
     position: absolute;
@@ -121,9 +121,8 @@
 </div>
 
 <style>
-  /* Use same CSS from movies for visual polish */
   
-  .top10-series-section h2 {
+   .top10-series-section h2 {
     padding-left: 20px;
     margin-bottom: 10px;
     font-size: 22px;
@@ -155,6 +154,7 @@
     flex: 1;
     align-items: center;
   }
+
 </style>
 
 <script>
@@ -169,7 +169,7 @@ const seriesDuration = document.getElementById("series-popup-duration");
 const seasonSelect = document.getElementById("series-season-select");
 const episodesContainer = document.getElementById("series-episodes");
 
-// Fetch Series
+
 fetch("data/top10series.json")
   .then(res => res.json())
   .then(seriesList => {
@@ -197,7 +197,7 @@ function openSeriesPopup(series) {
     <p><b>Industry:</b> ${series.industry || "Unknown"}</p>
   `;
 
-  // Populate season select
+ 
   seasonSelect.innerHTML = "";
   series.seasons.forEach((s, idx) => {
     const option = document.createElement("option");
@@ -232,6 +232,9 @@ function renderEpisodes(episodes) {
   });
 }
 
+
+
+
 seriesClose.onclick = () => seriesPopup.classList.add("hidden");
 seriesPopup.querySelector(".top10-popup-bg").onclick = () => seriesPopup.classList.add("hidden");
 
@@ -247,6 +250,8 @@ sRightBtn.onclick = () => {
 };
 </script>
 
+
+
 <!-- Popular Series Section -->
 <section class="top10-series-section">
   <h2>Popular Series</h2>
@@ -257,7 +262,7 @@ sRightBtn.onclick = () => {
   </div>
 </section>
 
-<!-- Dynamic Series Modal -->
+
 <div class="top10-popup hidden" id="popular-series-popup">
   <div class="top10-popup-bg"></div>
   <div class="top10-popup-content">
@@ -293,39 +298,44 @@ sRightBtn.onclick = () => {
 </div>
 
 <style>
-.popular-series-section h2 {
-  margin-top: 20px;
-  padding-left: 20px;
-  margin-bottom: 10px;
-  font-size: 22px;
-}
-.popular-series-row .top10-movie-box {
-  width: 180px;
-  height: 90px;
-}
+#series-episodes,
 #popular-series-episodes {
-  margin: 10px 0;
-}
-.episode-item {
+  margin: 15px 0;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 10px;
-  margin: 6px 0;
-  font-size: 14px;
 }
+
+.episode-item {
+   display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+    font-size: 14px;
+}
+
 .episode-item img {
-  width: 60px;
-  height: 35px;
-  object-fit: cover;
-  border-radius: 4px;
-  cursor: pointer;
+ width: 60px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 4px;
+    cursor: pointer;
 }
+
 .episode-meta {
-  display: flex;
-  justify-content: space-between;
-  flex: 1;
-  align-items: center;
+  .episode-meta {
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    align-items: center;
+  }
 }
+
+
+
+ 
+
+
 </style>
 
 <script>
@@ -340,7 +350,7 @@ const popularSeriesDuration = document.getElementById("popular-series-duration")
 const popularSeasonSelect = document.getElementById("popular-series-season-select");
 const popularEpisodesContainer = document.getElementById("popular-series-episodes");
 
-// Fetch Series
+
 fetch("data/popularSeries.json")
   .then(res => res.json())
   .then(seriesList => {
@@ -370,7 +380,7 @@ function openPopularSeriesPopup(series) {
     <p><b>Language:</b> ${series.language || "N/A"}</p>
   `;
 
-  // Populate seasons
+ 
   popularSeasonSelect.innerHTML = "";
   series.seasons.forEach((s, idx) => {
     const option = document.createElement("option");
@@ -406,11 +416,11 @@ function renderPopularEpisodes(episodes) {
   });
 }
 
-// Close logic
+
 popularSeriesClose.onclick = () => popularSeriesPopup.classList.add("hidden");
 popularSeriesPopup.querySelector(".popular-series-popup-bg").onclick = () => popularSeriesPopup.classList.add("hidden");
 
-// Scroll logic
+
 document.querySelector(".popular-series-scroll-left").onclick = () => {
   popularSeriesRow.scrollBy({ left: -popularSeriesRow.clientWidth, behavior: "smooth" });
 };
