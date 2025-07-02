@@ -233,7 +233,9 @@ function showDynamicPage(movie) {
         <tr><td><b>Director:</b></td><td>${movie.director || 'N/A'}</td></tr>
         <tr><td><b>Genre:</b></td><td>${movie.genre || 'N/A'}</td></tr>
         <tr><td><b>Industry:</b></td><td>${movie.industry || 'N/A'}</td></tr>
-        <tr><td><b>Imdb:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
+        <tr><td><b>Year:</b></td><td>${movie.year || 'N/A'}</td></tr>
+         <tr><td><b>Language:</b></td><td>${movie.language || 'N/A'}</td></tr>
+          <tr><td><b>Imdb:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
       </table>
     </div>
   `;
