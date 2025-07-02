@@ -253,44 +253,146 @@ function showDynamicPage(movie) {
 }
 
 
+// let allData = [];
+
+
+// fetch("data/allMovies.json"),
+// fetch("data/allseries.json")
+
+//   .then(res => res.json())
+//   .then(data => {
+//     allData = data;
+//   })
+//   .catch(err => console.error("❌ Failed to load allMovies.json:", err));
+
+
+// const overlay = document.getElementById("search-overlay");
+// const input = document.getElementById("search-input");
+// const resultsContainer = document.getElementById("search-results");
+// const loading = document.getElementById("loading");
+// const closeBtn = document.getElementById("close-search");
+
+
+// document.getElementById("search-button")?.addEventListener("click", () => {
+//   overlay.classList.add("active");
+//   input.value = "";
+//   resultsContainer.innerHTML = "";
+//   input.focus();
+// });
+
+
+// closeBtn.addEventListener("click", () => {
+//   overlay.classList.remove("active");
+//   resultsContainer.innerHTML = "";
+// });
+
+
+// input.addEventListener("input", () => {
+//   const query = input.value.trim().toLowerCase();
+//   resultsContainer.innerHTML = "";
+
+//   if (!query) return;
+
+//   loading.classList.remove("hidden");
+
+//   setTimeout(() => {
+//     loading.classList.add("hidden");
+
+//     const results = allData.filter(item =>
+//       item.name?.toLowerCase().includes(query)
+//     );
+
+//     if (results.length === 0) {
+//       resultsContainer.innerHTML = `<p style="color:white;">No results found</p>`;
+//       return;
+//     }
+
+//     results.forEach(item => {
+//       const img = document.createElement("img");
+//       img.src = item.thumbnail;
+//       img.alt = item.name;
+//       img.onclick = () => showModal(item);
+//       resultsContainer.appendChild(img);
+//     });
+//   }, 300);
+// });
+
+
+// function showModal(movie) {
+//   const overlay = document.createElement("div");
+//   overlay.className = "dynamic-overlay";
+//   overlay.innerHTML = `
+//     <div class="dynamic-content">
+//       <button class="close-btn">×</button>
+//       <img src="${movie.thumbnail}" alt="${movie.name}" />
+//       <h2>${movie.name}</h2>
+//       <div class="dynamic-actions">
+//         <button class="like-btn">♥ Like</button>
+//         <span>${movie.duration || '2h'}</span>
+//         <button class="play-btn">► Play</button>
+//       </div>
+//       <p>${movie.description || 'No description.'}</p>
+//       <table class="details-table">
+//         <tr><td><b>Cast:</b></td><td>${movie.cast || 'N/A'}</td></tr>
+//         <tr><td><b>Director:</b></td><td>${movie.director || 'N/A'}</td></tr>
+//         <tr><td><b>Genre:</b></td><td>${movie.genre || 'N/A'}</td></tr>
+//         <tr><td><b>Industry:</b></td><td>${movie.industry || 'N/A'}</td></tr>
+//         <tr><td><b>Year:</b></td><td>${movie.year || 'N/A'}</td></tr>
+//         <tr><td><b>Language:</b></td><td>${movie.language || 'N/A'}</td></tr>
+//         <tr><td><b>IMDb:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
+//       </table>
+//     </div>
+//   `;
+//   document.body.appendChild(overlay);
+
+//   overlay.onclick = e => {
+//     if (e.target.classList.contains("dynamic-overlay") || e.target.classList.contains("close-btn")) {
+//       overlay.remove();
+//     }
+//   };
+
+//   overlay.querySelector(".play-btn").onclick = () => {
+//     window.location.href = `player.html?video=${encodeURIComponent(movie.videoBase)}`;
+//   };
+// }
+/* Search Overlay */
 let allData = [];
 
-// Load data
-fetch("data/allMovies.json"),
-fetch("data/allseries.json")
-
-  .then(res => res.json())
-  .then(data => {
-    allData = data;
+Promise.all([
+  fetch("data/allMovies.json").then(res => res.json()),
+  fetch("data/allSeries.json").then(res => res.json())
+])
+  .then(([movies, series]) => {
+    allData = [...movies, ...series];
   })
-  .catch(err => console.error("❌ Failed to load allMovies.json:", err));
+  .catch(err => console.error("❌ Data Load Error:", err));
 
-// DOM elements
+// DOM Elements
 const overlay = document.getElementById("search-overlay");
 const input = document.getElementById("search-input");
 const resultsContainer = document.getElementById("search-results");
 const loading = document.getElementById("loading");
 const closeBtn = document.getElementById("close-search");
+const searchBtn = document.getElementById("search-button");
 
-// Show overlay (you can connect a search icon to open this)
-document.getElementById("search-button")?.addEventListener("click", () => {
+// Show Search Overlay
+searchBtn.onclick = () => {
   overlay.classList.add("active");
   input.value = "";
   resultsContainer.innerHTML = "";
   input.focus();
-});
+};
 
-// Hide overlay
-closeBtn.addEventListener("click", () => {
+// Hide Overlay
+closeBtn.onclick = () => {
   overlay.classList.remove("active");
   resultsContainer.innerHTML = "";
-});
+};
 
-// Search logic
+// Search Logic
 input.addEventListener("input", () => {
   const query = input.value.trim().toLowerCase();
   resultsContainer.innerHTML = "";
-
   if (!query) return;
 
   loading.classList.remove("hidden");
@@ -303,7 +405,7 @@ input.addEventListener("input", () => {
     );
 
     if (results.length === 0) {
-      resultsContainer.innerHTML = `<p style="color:white;">No results found</p>`;
+      resultsContainer.innerHTML = `<p style='color:white;'>No results found</p>`;
       return;
     }
 
@@ -311,24 +413,27 @@ input.addEventListener("input", () => {
       const img = document.createElement("img");
       img.src = item.thumbnail;
       img.alt = item.name;
-      img.onclick = () => showModal(item);
+      img.onclick = () => {
+        if (item.seasons) showSeriesModal(item);
+        else showMovieModal(item);
+      };
       resultsContainer.appendChild(img);
     });
   }, 300);
 });
 
-// Show modal
-function showModal(movie) {
-  const overlay = document.createElement("div");
-  overlay.className = "dynamic-overlay";
-  overlay.innerHTML = `
+// Movie Modal
+function showMovieModal(movie) {
+  const modal = document.createElement("div");
+  modal.className = "dynamic-overlay";
+  modal.innerHTML = `
     <div class="dynamic-content">
       <button class="close-btn">×</button>
       <img src="${movie.thumbnail}" alt="${movie.name}" />
       <h2>${movie.name}</h2>
       <div class="dynamic-actions">
         <button class="like-btn">♥ Like</button>
-        <span>${movie.duration || '2h'}</span>
+        <span>${movie.duration || 'N/A'}</span>
         <button class="play-btn">► Play</button>
       </div>
       <p>${movie.description || 'No description.'}</p>
@@ -339,19 +444,89 @@ function showModal(movie) {
         <tr><td><b>Industry:</b></td><td>${movie.industry || 'N/A'}</td></tr>
         <tr><td><b>Year:</b></td><td>${movie.year || 'N/A'}</td></tr>
         <tr><td><b>Language:</b></td><td>${movie.language || 'N/A'}</td></tr>
-        <tr><td><b>IMDb:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
+        <tr><td><b>IMDB:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
       </table>
     </div>
   `;
-  document.body.appendChild(overlay);
+  document.body.appendChild(modal);
 
-  overlay.onclick = e => {
+  modal.onclick = e => {
     if (e.target.classList.contains("dynamic-overlay") || e.target.classList.contains("close-btn")) {
-      overlay.remove();
+      modal.remove();
     }
   };
 
-  overlay.querySelector(".play-btn").onclick = () => {
+  modal.querySelector(".play-btn").onclick = () => {
     window.location.href = `player.html?video=${encodeURIComponent(movie.videoBase)}`;
   };
+}
+
+// Series Modal
+function showSeriesModal(series) {
+  const modal = document.createElement("div");
+  modal.className = "dynamic-overlay";
+
+  let currentSeason = 0;
+  const renderEpisodes = (index) => {
+    const episodes = series.seasons[index].episodes.map(ep => `
+      <div class="episode-item">
+        <div style="display: flex; align-items: center;">
+          <img src="${ep.thumbnail}" />
+          <span>${ep.name}</span>
+        </div>
+        <span>${ep.duration}</span>
+      </div>
+    `).join("");
+    return episodes;
+  };
+
+  modal.innerHTML = `
+    <div class="dynamic-content">
+      <button class="close-btn">×</button>
+      <img src="${series.thumbnail}" />
+      <h2>${series.name}</h2>
+      <div class="dynamic-actions">
+        <button class="like-btn">♥ Like</button>
+        <span>${series.seasons.length} Seasons</span>
+        <select id="season-select" class="season-select">
+          ${series.seasons.map((s, i) => `<option value="${i}">Season ${i + 1}</option>`).join("")}
+        </select>
+      </div>
+      <div class="episode-list" id="episode-list">
+        ${renderEpisodes(0)}
+      </div>
+      <p>${series.description}</p>
+      <table class="details-table">
+        <tr><td><b>Cast:</b></td><td>${series.cast || 'N/A'}</td></tr>
+        <tr><td><b>Director:</b></td><td>${series.director || 'N/A'}</td></tr>
+        <tr><td><b>Genre:</b></td><td>${series.genre || 'N/A'}</td></tr>
+        <tr><td><b>Industry:</b></td><td>${series.industry || 'N/A'}</td></tr>
+      </table>
+    </div>
+  `;
+
+  document.body.appendChild(modal);
+
+  modal.onclick = e => {
+    if (e.target.classList.contains("dynamic-overlay") || e.target.classList.contains("close-btn")) {
+      modal.remove();
+    }
+  };
+
+  const seasonDropdown = modal.querySelector("#season-select");
+  seasonDropdown.addEventListener("change", e => {
+    const seasonIndex = parseInt(e.target.value);
+    modal.querySelector("#episode-list").innerHTML = renderEpisodes(seasonIndex);
+  });
+
+  modal.querySelector("#episode-list").addEventListener("click", e => {
+    const item = e.target.closest(".episode-item");
+    if (!item) return;
+    const text = item.querySelector("span")?.textContent;
+    const seasonIndex = parseInt(seasonDropdown.value);
+    const episode = series.seasons[seasonIndex].episodes.find(ep => ep.name === text);
+    if (episode?.video) {
+      window.location.href = `player.html?video=${encodeURIComponent(episode.video)}`;
+    }
+  });
 }

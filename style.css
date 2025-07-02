@@ -72,68 +72,8 @@ a {
 }
 
 
-/* #search-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-#search-overlay.active {
-  display: flex;
-}
-.overlay-bg {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(6px);
-}
-.search-box {
-  position: relative;
-  width: 90%;
-  max-width: 600px;
-  z-index: 1;
-}
-#search-input {
-  width: 100%;
-  padding: 12px;
-  font-size: 18px;
-  border-radius: 6px;
-  border: none;
-}
-.close-btn {
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: #e50914;
-  color: white;
-  border: none;
-  font-size: 24px;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-}
-#loading {
-  margin: 15px auto;
-  text-align: center;
-}
-#search-results {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
-  margin-top: 20px;
-}
-#search-results img {
-  width: 180px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 5px;
-  cursor: pointer;
-} */
- #search-overlay {
+
+ /* #search-overlay {
   position: fixed;
   inset: 0;
   z-index: 9999;
@@ -246,7 +186,123 @@ a {
 
 .details-table td {
   padding: 4px;
+} */
+ /* Search Overlay */
+#search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 80px;
 }
+#search-overlay.active {
+  display: flex;
+}
+.search-box {
+  position: relative;
+  max-width: 90%;
+  width: 600px;
+  margin: 0 auto;
+}
+#search-input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 18px;
+  border-radius: 6px;
+  border: none;
+}
+.close-btn {
+  position: absolute;
+  top: -35px;
+  right: 0;
+  font-size: 24px;
+  background: #e50914;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+#loading {
+  text-align: center;
+  margin-top: 10px;
+}
+#search-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+#search-results img {
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Modal Overlay (both movie and series) */
+.dynamic-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dynamic-content {
+  background: #111;
+  color: white;
+  max-width: 700px;
+  width: 90%;
+  padding: 20px;
+  border-radius: 10px;
+  overflow-y: auto;
+  max-height: 90vh;
+  position: relative;
+}
+.dynamic-content img {
+  width: 100%;
+  border-radius: 6px;
+}
+.dynamic-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+.details-table {
+  width: 100%;
+  margin-top: 10px;
+}
+.details-table td {
+  padding: 4px 8px;
+}
+.episode-list img {
+  width: 60px;
+  height: 36px;
+  object-fit: cover;
+  margin-right: 10px;
+  border-radius: 4px;
+}
+.episode-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 4px 0;
+}
+.season-select {
+  margin-left: 10px;
+  padding: 5px;
+}
+
 
 
 
