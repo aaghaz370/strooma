@@ -210,17 +210,19 @@
     "language": "Telugu, Hindi, Tamil"
   },
   {
-  "name": "Jigarthanda DoubleX",
-  "thumbnail": "https://imgcdn.media/poster/341/81626533.jpg",
-  "videoBase": "https://archive.org/download/jigarthanda-doublex-2023",
-  "duration": "2h 52min",
-  "description": "A fiery gangster and an aspiring filmmaker collide in 1970s Tamil Nadu to make a movie, leading to a stylish, chaotic blend of violence, satire, and heart.",
-  "cast": "Raghava Lawrence, S. J. Suryah",
-  "director": "Karthik Subbaraj",
-  "genre": "Action, Drama, Satire",
-  "industry": "Kollywood",
-  "imdb": "8.3"
-},
+    "name": "Jigarthanda DoubleX",
+    "thumbnail": "https://imgcdn.media/poster/341/81626533.jpg",
+    "videoBase": "https://archive.org/download/jigarthanda-doublex-2023",
+    "duration": "2h 52min",
+    "description": "A fiery gangster and an aspiring filmmaker collide in 1970s Tamil Nadu to make a movie, leading to a stylish, chaotic blend of violence, satire, and heart.",
+    "cast": "Raghava Lawrence, S. J. Suryah",
+    "director": "Karthik Subbaraj",
+    "genre": "Action, Drama, Satire",
+    "industry": "Kollywood",
+    "imdb": "8.3",
+    "year": 2023,
+    "language": "Hindi, Tamil, Telugu, English"
+  },
   {
     "name": "Beast",
     "thumbnail": "https://imgcdn.media/poster/341/81508241.jpg",
@@ -231,7 +233,9 @@
     "director": "Nelson Dilipkumar",
     "genre": "Action, Thriller",
     "industry": "Kollywood",
-    "imdb": "5.2"
+    "imdb": "5.2",
+    "year": 2022,
+    "language": "Hindi, Tamil, Telugu, English"
   },
   {
     "name": "Commando",
@@ -243,7 +247,9 @@
     "director": "Dilip Ghosh",
     "genre": "Action, Martial Arts",
     "industry": "Bollywood",
-    "imdb": "6.2"
+    "imdb": "6.2",
+    "year": 2013,
+    "language": "Hindi, Tamil, Telugu, English"
   },
   {
     "name": "Kantara",
@@ -255,7 +261,9 @@
     "director": "Rishab Shetty",
     "genre": "Action, Folklore, Drama",
     "industry": "Sandalwood",
-    "imdb": "8.3"
+    "imdb": "8.3",
+    "year": 2022,
+    "language": "Hindi, Tamil, Telugu, English"
   },
   {
     "name": "Mad Max: Fury Road",
@@ -267,7 +275,9 @@
     "director": "George Miller",
     "genre": "Action, Sci-Fi, Adventure",
     "industry": "Hollywood",
-    "imdb": "8.1"
+    "imdb": "8.1",
+    "year": 2015,
+    "language": "English, Hindi"
   },
   {
     "name": "Nobody",
@@ -279,7 +289,9 @@
     "director": "Ilya Naishuller",
     "genre": "Action, Crime, Revenge Thriller",
     "industry": "Hollywood",
-    "imdb": "7.4"
+    "imdb": "7.4",
+    "year": 2021,
+    "language": "English, Hindi"
   },
   {
     "name": "The Equalizer",
@@ -291,7 +303,9 @@
     "director": "Antoine Fuqua",
     "genre": "Action, Crime, Vigilante",
     "industry": "Hollywood",
-    "imdb": "7.2"
+    "imdb": "7.2",
+    "year": 2014,
+    "language": "English, Hindi"
   },
   {
     "name": "Extraction",
@@ -303,7 +317,9 @@
     "director": "Sam Hargrave",
     "genre": "Action, Survival, Thriller",
     "industry": "Hollywood",
-    "imdb": "6.8"
+    "imdb": "6.8",
+    "year": 2020,
+    "language": "English, Hindi"
   },
   {
     "name": "Skyfall",
@@ -315,7 +331,9 @@
     "director": "Sam Mendes",
     "genre": "Spy, Action, Thriller",
     "industry": "Hollywood",
-    "imdb": "7.8"
+    "imdb": "7.8",
+    "year": 2012,
+    "language": "English, Hindi"
   },
   {
     "name": "The Bourne Ultimatum",
@@ -327,7 +345,9 @@
     "director": "Paul Greengrass",
     "genre": "Spy, Action, Thriller",
     "industry": "Hollywood",
-    "imdb": "8.0"
+    "imdb": "8.0",
+    "year": 2007,
+    "language": "English, Hindi"
   },
   {
     "name": "Tenet",
@@ -339,7 +359,9 @@
     "director": "Christopher Nolan",
     "genre": "Sci-Fi, Action, Spy",
     "industry": "Hollywood",
-    "imdb": "7.3"
+    "imdb": "7.3",
+    "year": 2020,
+    "language": "English, Hindi"
   },
   {
     "name": "Pacific Rim",
@@ -351,7 +373,9 @@
     "director": "Guillermo del Toro",
     "genre": "Sci-Fi, Action, Mecha",
     "industry": "Hollywood",
-    "imdb": "6.9"
+    "imdb": "6.9",
+    "year": 2013,
+    "language": "English, Hindi"
   },
   {
     "name": "The Hunger Games",
@@ -363,7 +387,9 @@
     "director": "Gary Ross",
     "genre": "Adventure, Sci-Fi, Drama",
     "industry": "Hollywood",
-    "imdb": "7.2"
+    "imdb": "7.2",
+    "year": 2012,
+    "language": "English, Hindi"
   },
   {
     "name": "Mission: Impossible – Fallout",
@@ -375,9 +401,13 @@
     "director": "Christopher McQuarrie",
     "genre": "Spy, Action, Thriller",
     "industry": "Hollywood",
-    "imdb": "7.7"
+    "imdb": "7.7",
+    "year": 2018,
+    "language": "English, Hindi"
   }
 ]
+
+
 
 
 
