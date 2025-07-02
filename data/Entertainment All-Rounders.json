@@ -9,7 +9,9 @@
     "director": "Vikas Bahl",
     "genre": "Drama, Biography, Education",
     "industry": "Indian",
-    "imdb": "7.9"
+    "imdb": "7.9",
+    "year": 2019,
+    "language": "Hindi"
   },
   {
     "name": "Chhichhore",
@@ -21,20 +23,24 @@
     "director": "Nitesh Tiwari",
     "genre": "Drama, Comedy, Inspirational",
     "industry": "Indian",
-    "imdb": "8.3"
+    "imdb": "8.3",
+    "year": 2019,
+    "language": "Hindi"
   },
   {
-  "name": "Housefull 4",
-  "thumbnail": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/5178/605178-h",
-  "videoBase": "https://archive.org/download/housefull-4-2019",
-  "duration": "2h 25min",
-  "description": "Three couples are set to marry in London, but a twist of fate reveals they’ve all been reincarnated from a royal past 600 years ago. Chaos and comedy follow as destinies clash.",
-  "cast": "Akshay Kumar, Riteish Deshmukh, Bobby Deol, Kriti Sanon, Pooja Hegde",
-  "director": "Farhad Samji",
-  "genre": "Comedy, Fantasy, Reincarnation",
-  "industry": "Indian",
-  "imdb": "3.5"
-},
+    "name": "Housefull 4",
+    "thumbnail": "https://img1.hotstarext.com/image/upload/f_auto/sources/r1/cms/prod/5178/605178-h",
+    "videoBase": "https://archive.org/download/housefull-4-2019",
+    "duration": "2h 25min",
+    "description": "Three couples are set to marry in London, but a twist of fate reveals they’ve all been reincarnated from a royal past 600 years ago. Chaos and comedy follow as destinies clash.",
+    "cast": "Akshay Kumar, Riteish Deshmukh, Bobby Deol, Kriti Sanon, Pooja Hegde",
+    "director": "Farhad Samji",
+    "genre": "Comedy, Fantasy, Reincarnation",
+    "industry": "Indian",
+    "imdb": "3.5",
+    "year": 2019,
+    "language": "Hindi"
+  },
   {
     "name": "PK",
     "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpQZL-_Uz8_msIvnuUYARuT-E711ToJnwZyA&s",
@@ -45,7 +51,9 @@
     "director": "Rajkumar Hirani",
     "genre": "Comedy, Drama, Satire",
     "industry": "Indian",
-    "imdb": "8.1"
+    "imdb": "8.1",
+    "year": 2014,
+    "language": "Hindi"
   },
   {
     "name": "Zindagi Na Milegi Dobara",
@@ -57,7 +65,9 @@
     "director": "Zoya Akhtar",
     "genre": "Adventure, Comedy, Drama",
     "industry": "Indian",
-    "imdb": "8.2"
+    "imdb": "8.2",
+    "year": 2011,
+    "language": "Hindi"
   },
   {
     "name": "English Vinglish",

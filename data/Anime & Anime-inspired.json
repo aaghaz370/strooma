@@ -9,7 +9,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Fantasy, Adventure",
     "industry": "Japanese Anime",
-    "imdb": "8.6"
+    "imdb": "8.6",
+    "year": 2001,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Your Name",
@@ -21,7 +23,9 @@
     "director": "Makoto Shinkai",
     "genre": "Romance, Drama, Fantasy",
     "industry": "Japanese Anime",
-    "imdb": "8.4"
+    "imdb": "8.4",
+    "year": 2016,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "A Silent Voice",
@@ -33,7 +37,9 @@
     "director": "Naoko Yamada",
     "genre": "Drama, School, Slice of Life",
     "industry": "Japanese Anime",
-    "imdb": "8.1"
+    "imdb": "8.1",
+    "year": 2016,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Howl's Moving Castle",
@@ -45,7 +51,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Fantasy, Adventure",
     "industry": "Japanese Anime",
-    "imdb": "8.2"
+    "imdb": "8.2",
+    "year": 2004,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Weathering With You",
@@ -57,7 +65,9 @@
     "director": "Makoto Shinkai",
     "genre": "Fantasy, Romance",
     "industry": "Japanese Anime",
-    "imdb": "7.5"
+    "imdb": "7.5",
+    "year": 2019,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Princess Mononoke",
@@ -69,7 +79,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Action, Fantasy, War",
     "industry": "Japanese Anime",
-    "imdb": "8.3"
+    "imdb": "8.3",
+    "year": 1997,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "The Girl Who Leapt Through Time",
@@ -81,7 +93,9 @@
     "director": "Mamoru Hosoda",
     "genre": "Sci-Fi, Drama",
     "industry": "Japanese Anime",
-    "imdb": "7.7"
+    "imdb": "7.7",
+    "year": 2006,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Akira",
@@ -93,7 +107,9 @@
     "director": "Katsuhiro Otomo",
     "genre": "Cyberpunk, Sci-Fi, Action",
     "industry": "Japanese Anime",
-    "imdb": "8.0"
+    "imdb": "8.0",
+    "year": 1988,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Ponyo",
@@ -105,7 +121,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Fantasy, Family",
     "industry": "Japanese Anime",
-    "imdb": "7.6"
+    "imdb": "7.6",
+    "year": 2008,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "My Neighbor Totoro",
@@ -117,7 +135,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Family, Fantasy",
     "industry": "Japanese Anime",
-    "imdb": "8.2"
+    "imdb": "8.2",
+    "year": 1988,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Paprika",
@@ -129,7 +149,9 @@
     "director": "Satoshi Kon",
     "genre": "Sci-Fi, Psychological, Thriller",
     "industry": "Japanese Anime",
-    "imdb": "7.7"
+    "imdb": "7.7",
+    "year": 2006,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "The Tale of the Princess Kaguya",
@@ -141,7 +163,9 @@
     "director": "Isao Takahata",
     "genre": "Fantasy, Drama, Folklore",
     "industry": "Japanese Anime",
-    "imdb": "8.0"
+    "imdb": "8.0",
+    "year": 2013,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Belle",
@@ -153,7 +177,9 @@
     "director": "Mamoru Hosoda",
     "genre": "Drama, Sci-Fi, Music",
     "industry": "Japanese Anime",
-    "imdb": "7.1"
+    "imdb": "7.1",
+    "year": 2021,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "The Wind Rises",
@@ -165,7 +191,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Historical, Biography, Drama",
     "industry": "Japanese Anime",
-    "imdb": "7.7"
+    "imdb": "7.7",
+    "year": 2013,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "5 Centimeters per Second",
@@ -177,7 +205,9 @@
     "director": "Makoto Shinkai",
     "genre": "Drama, Romance",
     "industry": "Japanese Anime",
-    "imdb": "7.5"
+    "imdb": "7.5",
+    "year": 2007,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "The Red Turtle",
@@ -189,7 +219,9 @@
     "director": "Michael Dudok de Wit",
     "genre": "Fantasy, Survival, Drama",
     "industry": "French-Japanese Animation",
-    "imdb": "7.5"
+    "imdb": "7.5",
+    "year": 2016,
+    "language": "No Dialogue"
   },
   {
     "name": "Nausicaä of the Valley of the Wind",
@@ -201,7 +233,9 @@
     "director": "Hayao Miyazaki",
     "genre": "Sci-Fi, Adventure, Ecology",
     "industry": "Japanese Anime",
-    "imdb": "8.0"
+    "imdb": "8.0",
+    "year": 1984,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Wolf Children",
@@ -213,7 +247,9 @@
     "director": "Mamoru Hosoda",
     "genre": "Drama, Fantasy, Family",
     "industry": "Japanese Anime",
-    "imdb": "8.1"
+    "imdb": "8.1",
+    "year": 2012,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "The Secret World of Arrietty",
@@ -225,7 +261,9 @@
     "director": "Hiromasa Yonebayashi",
     "genre": "Fantasy, Adventure",
     "industry": "Japanese Anime",
-    "imdb": "7.6"
+    "imdb": "7.6",
+    "year": 2010,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Mirai",
@@ -237,7 +275,9 @@
     "director": "Mamoru Hosoda",
     "genre": "Fantasy, Family",
     "industry": "Japanese Anime",
-    "imdb": "7.0"
+    "imdb": "7.0",
+    "year": 2018,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "When Marnie Was There",
@@ -249,7 +289,9 @@
     "director": "Hiromasa Yonebayashi",
     "genre": "Drama, Mystery",
     "industry": "Japanese Anime",
-    "imdb": "7.7"
+    "imdb": "7.7",
+    "year": 2014,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Flavors of Youth",
@@ -261,7 +303,9 @@
     "director": "Li Haoling, Jiaoshou Yi Xiaoxing",
     "genre": "Drama, Anthology",
     "industry": "Chinese-Japanese Anime",
-    "imdb": "6.6"
+    "imdb": "6.6",
+    "year": 2018,
+    "language": "Japanese, Mandarin, English"
   },
   {
     "name": "Big Fish & Begonia",
@@ -273,7 +317,9 @@
     "director": "Xuan Liang, Chun Zhang",
     "genre": "Fantasy, Romance",
     "industry": "Chinese Anime",
-    "imdb": "7.0"
+    "imdb": "7.0",
+    "year": 2016,
+    "language": "Mandarin, Hindi, English"
   },
   {
     "name": "In This Corner of the World",
@@ -285,7 +331,9 @@
     "director": "Sunao Katabuchi",
     "genre": "Historical, Drama",
     "industry": "Japanese Anime",
-    "imdb": "7.8"
+    "imdb": "7.8",
+    "year": 2016,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Children Who Chase Lost Voices",
@@ -297,7 +345,9 @@
     "director": "Makoto Shinkai",
     "genre": "Adventure, Fantasy",
     "industry": "Japanese Anime",
-    "imdb": "7.1"
+    "imdb": "7.1",
+    "year": 2011,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "The Garden of Words",
@@ -309,7 +359,9 @@
     "director": "Makoto Shinkai",
     "genre": "Romance, Drama",
     "industry": "Japanese Anime",
-    "imdb": "7.4"
+    "imdb": "7.4",
+    "year": 2013,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Modest Heroes",
@@ -321,7 +373,9 @@
     "director": "Hiromasa Yonebayashi, Yoshiyuki Momose",
     "genre": "Anthology, Fantasy",
     "industry": "Japanese Anime",
-    "imdb": "6.6"
+    "imdb": "6.6",
+    "year": 2018,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Tokyo Godfathers",
@@ -333,7 +387,9 @@
     "director": "Satoshi Kon",
     "genre": "Drama, Comedy",
     "industry": "Japanese Anime",
-    "imdb": "7.9"
+    "imdb": "7.9",
+    "year": 2003,
+    "language": "Japanese, Hindi, English"
   },
   {
     "name": "Summer Wars",
@@ -345,8 +401,8 @@
     "director": "Mamoru Hosoda",
     "genre": "Sci-Fi, Family, Action",
     "industry": "Japanese Anime",
-    "imdb": "7.4"
+    "imdb": "7.4",
+    "year": 2009,
+    "language": "Japanese, Hindi, English"
   }
-
-
 ]

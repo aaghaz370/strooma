@@ -1,5 +1,5 @@
 [
-    {
+  {
     "name": "Baahubali 2: The Conclusion",
     "thumbnail": "https://imgcdn.media/poster/341/80203996.jpg",
     "videoBase": "https://archive.org/download/baahubali-2",
@@ -9,7 +9,9 @@
     "director": "S.S. Rajamouli",
     "genre": "Action, Fantasy, Epic",
     "industry": "Tollywood",
-    "imdb": "8.2"
+    "imdb": "8.2",
+    "year": "2017",
+    "language": "Telugu, Hindi, Tamil, Malayalam"
   },
   {
     "name": "Salaar: Part 1 – Ceasefire",
@@ -21,7 +23,9 @@
     "director": "Prashanth Neel",
     "genre": "Action, Drama",
     "industry": "Tollywood",
-    "imdb": "6.6"
+    "imdb": "6.6",
+    "year": "2023",
+    "language": "Telugu, Hindi, Tamil, Kannada, Malayalam"
   },
   {
     "name": "Vikram",
@@ -33,7 +37,9 @@
     "director": "Lokesh Kanagaraj",
     "genre": "Action, Thriller",
     "industry": "Kollywood",
-    "imdb": "8.3"
+    "imdb": "8.3",
+    "year": "2022",
+    "language": "Tamil, Hindi, Telugu, Malayalam"
   },
   {
     "name": "Kaithi",
@@ -45,7 +51,9 @@
     "director": "Lokesh Kanagaraj",
     "genre": "Action, Crime, Thriller",
     "industry": "Kollywood",
-    "imdb": "8.4"
+    "imdb": "8.4",
+    "year": "2019",
+    "language": "Tamil, Hindi"
   },
   {
     "name": "Leo",
@@ -57,7 +65,9 @@
     "director": "Lokesh Kanagaraj",
     "genre": "Action, Thriller",
     "industry": "Kollywood",
-    "imdb": "7.4"
+    "imdb": "7.4",
+    "year": "2023",
+    "language": "Tamil, Hindi, Telugu"
   },
   {
     "name": "WAR",
@@ -69,7 +79,9 @@
     "director": "Siddharth Anand",
     "genre": "Action, Spy Thriller",
     "industry": "Bollywood",
-    "imdb": "6.5"
+    "imdb": "6.5",
+    "year": "2019",
+    "language": "Hindi"
   },
   {
     "name": "Marco",
@@ -81,7 +93,9 @@
     "director": "Lokesh Kanagaraj",
     "genre": "Action, Crime",
     "industry": "Mollywood",
-    "imdb": "7.4"
+    "imdb": "7.4",
+    "year": "2024",
+    "language": "Malayalam"
   },
   {
     "name": "Kill",
@@ -93,7 +107,9 @@
     "director": "Nikhil Nagesh Bhat",
     "genre": "Action, Thriller",
     "industry": "Bollywood",
-    "imdb": "8.5"
+    "imdb": "8.5",
+    "year": "2024",
+    "language": "Hindi"
   },
   {
     "name": "Uri: The Surgical Strike",
@@ -105,32 +121,38 @@
     "director": "Aditya Dhar",
     "genre": "Action, War, Drama",
     "industry": "Bollywood",
-    "imdb": "8.2"
+    "imdb": "8.2",
+    "year": "2019",
+    "language": "Hindi"
   },
   {
-  "name": "HIT: The Third Case",
-  "thumbnail": "https://imgcdn.media/poster/h/81999621.jpg",
-  "videoBase": "https://archive.org/download/hit-the-third-case-2025",
-  "duration": "2h 19min",
-  "description": "The third installment in the HIT universe follows a new officer battling psychological trauma while solving a gruesome and deeply personal case.",
-  "cast": "Adivi Sesh",
-  "director": "Sailesh Kolanu",
-  "genre": "Crime, Action, Thriller",
-  "industry": "Tollywood",
-  "imdb": "TBA"
-},
+    "name": "HIT: The Third Case",
+    "thumbnail": "https://imgcdn.media/poster/h/81999621.jpg",
+    "videoBase": "https://archive.org/download/hit-the-third-case-2025",
+    "duration": "2h 19min",
+    "description": "The third installment in the HIT universe follows a new officer battling psychological trauma while solving a gruesome and deeply personal case.",
+    "cast": "Adivi Sesh",
+    "director": "Sailesh Kolanu",
+    "genre": "Crime, Action, Thriller",
+    "industry": "Tollywood",
+    "imdb": "TBA",
+    "year": "2025",
+    "language": "Telugu"
+  },
   {
-  "name": "Surya: The Soldier",
-  "thumbnail": "https://akamaividz2.zee5.com/image/upload/w_1170,h_658,c_scale/resources/0-0-19909/list/0019909list416501110.jpg",
-  "videoBase": "https://archive.org/download/surya-the-soldier-2018",
-  "duration": "2h 47min",
-  "description": "A hot-headed army soldier with anger issues must prove his worth by controlling his rage while fighting enemies on both sides of the border.",
-  "cast": "Allu Arjun, Anu Emmanuel, Arjun Sarja",
-  "director": "Vakkantham Vamsi",
-  "genre": "Action, Drama",
-  "industry": "Tollywood",
-  "imdb": "6.6"
-},
+    "name": "Surya: The Soldier",
+    "thumbnail": "https://akamaividz2.zee5.com/image/upload/w_1170,h_658,c_scale/resources/0-0-19909/list/0019909list416501110.jpg",
+    "videoBase": "https://archive.org/download/surya-the-soldier-2018",
+    "duration": "2h 47min",
+    "description": "A hot-headed army soldier with anger issues must prove his worth by controlling his rage while fighting enemies on both sides of the border.",
+    "cast": "Allu Arjun, Anu Emmanuel, Arjun Sarja",
+    "director": "Vakkantham Vamsi",
+    "genre": "Action, Drama",
+    "industry": "Tollywood",
+    "imdb": "6.6",
+    "year": "2018",
+    "language": "Telugu, Hindi"
+  },
   {
     "name": "Pushpa: The Rise",
     "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/40421ec9481a276b2551f624a5c757c65181de03a64aee46e6193677d76d32fd.__SX960__SY540__QL60__._TTW_.png",
@@ -141,7 +163,9 @@
     "director": "Sukumar",
     "genre": "Action, Crime, Mass Entertainer",
     "industry": "Tollywood",
-    "imdb": "7.6"
+    "imdb": "7.6",
+    "year": "2021",
+    "language": "Telugu, Hindi, Tamil, Kannada, Malayalam"
   },
   {
     "name": "K.G.F: Chapter 2",
@@ -153,7 +177,9 @@
     "director": "Prashanth Neel",
     "genre": "Action, Gangster, Epic",
     "industry": "Sandalwood",
-    "imdb": "8.3"
+    "imdb": "8.3",
+    "year": "2022",
+    "language": "Kannada, Hindi, Telugu, Tamil, Malayalam"
   },
   {
     "name": "Michael",
@@ -165,7 +191,9 @@
     "director": "Ranjit Jeyakodi",
     "genre": "Action, Crime, Neo-Noir",
     "industry": "Tollywood",
-    "imdb": "6.8"
+    "imdb": "6.8",
+    "year": "2023",
+    "language": "Telugu, Hindi, Tamil"
   },
   {
     "name": "Shyam Singha Roy",
@@ -177,7 +205,9 @@
     "director": "Rahul Sankrityan",
     "genre": "Action, Period, Drama",
     "industry": "Tollywood",
-    "imdb": "7.6"
+    "imdb": "7.6",
+    "year": "2021",
+    "language": "Telugu, Hindi, Tamil"
   },
   {
   "name": "Jigarthanda DoubleX",
