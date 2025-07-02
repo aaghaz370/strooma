@@ -82,16 +82,6 @@ document.querySelector(".next-slide").onclick = () => {
 };
 
 // ==== Search Toggle ====
-// const searchToggle = document.getElementById("search-toggle");
-// const searchOverlay = document.getElementById("search-overlay");
-// const closeSearch = document.getElementById("close-search");
-// searchToggle.onclick = () => searchOverlay.classList.add("active");
-// closeSearch.onclick = () => {
-//   searchOverlay.classList.remove("active");
-//   document.getElementById("search-input").value = "";
-//   document.getElementById("search-results").innerHTML = "";
-// };
-
 
 const top10Row = document.getElementById("top10-row");
 const top10Popup = document.getElementById("top10-popup");
@@ -253,108 +243,6 @@ function showDynamicPage(movie) {
 }
 
 
-// let allData = [];
-
-
-// fetch("data/allMovies.json"),
-// fetch("data/allseries.json")
-
-//   .then(res => res.json())
-//   .then(data => {
-//     allData = data;
-//   })
-//   .catch(err => console.error("❌ Failed to load allMovies.json:", err));
-
-
-// const overlay = document.getElementById("search-overlay");
-// const input = document.getElementById("search-input");
-// const resultsContainer = document.getElementById("search-results");
-// const loading = document.getElementById("loading");
-// const closeBtn = document.getElementById("close-search");
-
-
-// document.getElementById("search-button")?.addEventListener("click", () => {
-//   overlay.classList.add("active");
-//   input.value = "";
-//   resultsContainer.innerHTML = "";
-//   input.focus();
-// });
-
-
-// closeBtn.addEventListener("click", () => {
-//   overlay.classList.remove("active");
-//   resultsContainer.innerHTML = "";
-// });
-
-
-// input.addEventListener("input", () => {
-//   const query = input.value.trim().toLowerCase();
-//   resultsContainer.innerHTML = "";
-
-//   if (!query) return;
-
-//   loading.classList.remove("hidden");
-
-//   setTimeout(() => {
-//     loading.classList.add("hidden");
-
-//     const results = allData.filter(item =>
-//       item.name?.toLowerCase().includes(query)
-//     );
-
-//     if (results.length === 0) {
-//       resultsContainer.innerHTML = `<p style="color:white;">No results found</p>`;
-//       return;
-//     }
-
-//     results.forEach(item => {
-//       const img = document.createElement("img");
-//       img.src = item.thumbnail;
-//       img.alt = item.name;
-//       img.onclick = () => showModal(item);
-//       resultsContainer.appendChild(img);
-//     });
-//   }, 300);
-// });
-
-
-// function showModal(movie) {
-//   const overlay = document.createElement("div");
-//   overlay.className = "dynamic-overlay";
-//   overlay.innerHTML = `
-//     <div class="dynamic-content">
-//       <button class="close-btn">×</button>
-//       <img src="${movie.thumbnail}" alt="${movie.name}" />
-//       <h2>${movie.name}</h2>
-//       <div class="dynamic-actions">
-//         <button class="like-btn">♥ Like</button>
-//         <span>${movie.duration || '2h'}</span>
-//         <button class="play-btn">► Play</button>
-//       </div>
-//       <p>${movie.description || 'No description.'}</p>
-//       <table class="details-table">
-//         <tr><td><b>Cast:</b></td><td>${movie.cast || 'N/A'}</td></tr>
-//         <tr><td><b>Director:</b></td><td>${movie.director || 'N/A'}</td></tr>
-//         <tr><td><b>Genre:</b></td><td>${movie.genre || 'N/A'}</td></tr>
-//         <tr><td><b>Industry:</b></td><td>${movie.industry || 'N/A'}</td></tr>
-//         <tr><td><b>Year:</b></td><td>${movie.year || 'N/A'}</td></tr>
-//         <tr><td><b>Language:</b></td><td>${movie.language || 'N/A'}</td></tr>
-//         <tr><td><b>IMDb:</b></td><td>${movie.imdb || 'N/A'}</td></tr>
-//       </table>
-//     </div>
-//   `;
-//   document.body.appendChild(overlay);
-
-//   overlay.onclick = e => {
-//     if (e.target.classList.contains("dynamic-overlay") || e.target.classList.contains("close-btn")) {
-//       overlay.remove();
-//     }
-//   };
-
-//   overlay.querySelector(".play-btn").onclick = () => {
-//     window.location.href = `player.html?video=${encodeURIComponent(movie.videoBase)}`;
-//   };
-// }
 /* Search Overlay */
 let allData = [];
 
@@ -530,3 +418,6 @@ function showSeriesModal(series) {
     }
   });
 }
+
+
+

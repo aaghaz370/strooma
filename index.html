@@ -247,9 +247,180 @@ sRightBtn.onclick = () => {
 };
 </script>
 
+<!-- Popular Series Section -->
+<section class="top10-series-section">
+  <h2>Popular Series</h2>
+  <div class="top10-scroll-container">
+    <button class="top10-scroll-left">❮</button>
+    <div class="top10-movie-row" id="popular-series-row"></div>
+    <button class="top10-scroll-right">❯</button>
+  </div>
+</section>
+
+<!-- Dynamic Series Modal -->
+<div class="top10-popup hidden" id="popular-series-popup">
+  <div class="top10-popup-bg"></div>
+  <div class="top10-popup-content">
+    <img id="popular-series-img" src="" alt="Series" />
+    <button id="popular-series-close"
+      style="
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        z-index: 10000;
+      ">
+      ×
+    </button>
+
+    <h3 id="popular-series-title"></h3>
+    <div class="top10-popup-actions">
+      <button id="popular-series-like">♥ Like</button>
+      <span id="popular-series-duration"></span>
+      <select id="popular-series-season-select"></select>
+    </div>
+    <div id="popular-series-episodes"></div>
+    <p id="popular-series-desc"></p>
+    <div id="popular-series-details"></div>
+  </div>
+</div>
+
+<style>
+.popular-series-section h2 {
+  margin-top: 20px;
+  padding-left: 20px;
+  margin-bottom: 10px;
+  font-size: 22px;
+}
+.popular-series-row .top10-movie-box {
+  width: 180px;
+  height: 90px;
+}
+#popular-series-episodes {
+  margin: 10px 0;
+}
+.episode-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+  font-size: 14px;
+}
+.episode-item img {
+  width: 60px;
+  height: 35px;
+  object-fit: cover;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.episode-meta {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  align-items: center;
+}
+</style>
+
+<script>
+const popularSeriesRow = document.getElementById("popular-series-row");
+const popularSeriesPopup = document.getElementById("popular-series-popup");
+const popularSeriesImg = document.getElementById("popular-series-img");
+const popularSeriesTitle = document.getElementById("popular-series-title");
+const popularSeriesDesc = document.getElementById("popular-series-desc");
+const popularSeriesDetails = document.getElementById("popular-series-details");
+const popularSeriesClose = document.getElementById("popular-series-close");
+const popularSeriesDuration = document.getElementById("popular-series-duration");
+const popularSeasonSelect = document.getElementById("popular-series-season-select");
+const popularEpisodesContainer = document.getElementById("popular-series-episodes");
+
+// Fetch Series
+fetch("data/popularSeries.json")
+  .then(res => res.json())
+  .then(seriesList => {
+    seriesList.forEach((series) => {
+      const box = document.createElement("div");
+      box.className = "top10-movie-box";
+      box.innerHTML = `
+        <img src="${series.thumbnail}" alt="${series.name}">
+      `;
+      box.onclick = () => openPopularSeriesPopup(series);
+      popularSeriesRow.appendChild(box);
+    });
+  });
+
+function openPopularSeriesPopup(series) {
+  popularSeriesImg.src = series.thumbnail;
+  popularSeriesTitle.textContent = series.name;
+  popularSeriesDesc.textContent = series.description || "No description.";
+  popularSeriesDuration.textContent = series.duration || "N/A";
+  popularSeriesDetails.innerHTML = `
+    <p><b>Cast:</b> ${series.cast || "Unknown"}</p>
+    <p><b>Director:</b> ${series.director || "Unknown"}</p>
+    <p><b>Genre:</b> ${series.genre || "Unknown"}</p>
+    <p><b>Industry:</b> ${series.industry || "Unknown"}</p>
+    <p><b>IMDB:</b> ${series.imdb || "N/A"}</p>
+    <p><b>Year:</b> ${series.year || "N/A"}</p>
+    <p><b>Language:</b> ${series.language || "N/A"}</p>
+  `;
+
+  // Populate seasons
+  popularSeasonSelect.innerHTML = "";
+  series.seasons.forEach((s, idx) => {
+    const option = document.createElement("option");
+    option.value = idx;
+    option.textContent = `Season ${s.season}`;
+    popularSeasonSelect.appendChild(option);
+  });
+
+  popularSeasonSelect.selectedIndex = series.seasons.length - 1;
+  renderPopularEpisodes(series.seasons[popularSeasonSelect.selectedIndex].episodes);
+
+  popularSeasonSelect.onchange = () => {
+    const season = series.seasons[popularSeasonSelect.value];
+    renderPopularEpisodes(season.episodes);
+  };
+
+  popularSeriesPopup.classList.remove("hidden");
+}
+
+function renderPopularEpisodes(episodes) {
+  popularEpisodesContainer.innerHTML = "";
+  episodes.forEach(ep => {
+    const item = document.createElement("div");
+    item.className = "episode-item";
+    item.innerHTML = `
+      <img src="${ep.thumbnail}" alt="${ep.title}" onclick="window.location.href='player.html?video=${encodeURIComponent(ep.videoBase)}'">
+      <div class="episode-meta">
+        <span>${ep.title}</span>
+        <span>${ep.duration}</span>
+      </div>
+    `;
+    popularEpisodesContainer.appendChild(item);
+  });
+}
+
+// Close logic
+popularSeriesClose.onclick = () => popularSeriesPopup.classList.add("hidden");
+popularSeriesPopup.querySelector(".popular-series-popup-bg").onclick = () => popularSeriesPopup.classList.add("hidden");
+
+// Scroll logic
+document.querySelector(".popular-series-scroll-left").onclick = () => {
+  popularSeriesRow.scrollBy({ left: -popularSeriesRow.clientWidth, behavior: "smooth" });
+};
+document.querySelector(".popular-series-scroll-right").onclick = () => {
+  popularSeriesRow.scrollBy({ left: popularSeriesRow.clientWidth, behavior: "smooth" });
+};
+</script>
 
 
-    <!-- Dynamic Categories -->
+<!-- Dynamic Categories -->
     <div id="categories-container"></div>
   </div>
 
