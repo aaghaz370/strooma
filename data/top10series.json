@@ -13,10 +13,11 @@
         "season": 1,
         "episodes": [
           {
-            "title": "Secrets",
+            "title": "Episode 1 | Secrets |",
             "thumbnail": "https://m.media-amazon.com/images/S/pv-target-images/ebccfc1566ad4904cca3af25d38be6a02bef8069c1a75687ac6d03045fee5de3.jpg",
-            "duration": "52 min",
+            "duration": " 52 min |",
             "videoBase": "videos/dark/s1e1.mp4"
+            
           },
           {
             "title": "Lies",

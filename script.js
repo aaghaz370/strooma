@@ -349,22 +349,26 @@ function showMovieModal(movie) {
   };
 }
 
-// Series Modal
+
+
+
 function showSeriesModal(series) {
   const modal = document.createElement("div");
   modal.className = "dynamic-overlay";
 
-  let currentSeason = 0;
   const renderEpisodes = (index) => {
-    const episodes = series.seasons[index].episodes.map(ep => `
-      <div class="episode-item">
-        <div style="display: flex; align-items: center;">
-          <img src="${ep.thumbnail}" />
-          <span>${ep.name}</span>
+    const episodes = series.seasons[index].episodes.map((ep, epIndex, arr) => {
+      return `
+        <div class="episode-item">
+          <div class="episode-meta">
+            <img src="${ep.thumbnail}" onclick="window.location.href='player.html?video=${encodeURIComponent(ep.video)}'"/>
+            <div class="episode-name">${ep.name}</div>
+          </div>
+          <div class="episode-duration">${ep.duration}</div>
         </div>
-        <span>${ep.duration}</span>
-      </div>
-    `).join("");
+        ${epIndex < arr.length - 1 ? `<div class="episode-divider"></div>` : ''}
+      `;
+    }).join("");
     return episodes;
   };
 
@@ -410,7 +414,7 @@ function showSeriesModal(series) {
   modal.querySelector("#episode-list").addEventListener("click", e => {
     const item = e.target.closest(".episode-item");
     if (!item) return;
-    const text = item.querySelector("span")?.textContent;
+    const text = item.querySelector(".episode-name")?.textContent;
     const seasonIndex = parseInt(seasonDropdown.value);
     const episode = series.seasons[seasonIndex].episodes.find(ep => ep.name === text);
     if (episode?.video) {
@@ -418,6 +422,4 @@ function showSeriesModal(series) {
     }
   });
 }
-
-
 
