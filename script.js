@@ -237,10 +237,21 @@ function showDynamicPage(movie) {
     }
   };
 
+  // overlay.querySelector('.play-btn').onclick = () => {
+  //   window.location.href = `player.html?video=${encodeURIComponent(movie.video)}`;
+  // };
   overlay.querySelector('.play-btn').onclick = () => {
-    window.location.href = `player.html?video=${encodeURIComponent(movie.video)}`;
-  };
+  const title = encodeURIComponent(movie.name || 'Untitled');
+  const video = encodeURIComponent(movie.videoBase || '');
+  if (video) {
+    window.location.href = `player.html?title=${title}&video=${video}`;
+  } else {
+    alert("Video not available.");
+  }
+};
+
 }
+
 
 
 /* Search Overlay */

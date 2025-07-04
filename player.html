@@ -1,8 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Player</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: white;
+      font-family: sans-serif;
+    }
+
+    #player-container {
+      position: relative;
+      max-width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    video {
+      max-height: 80vh;
+      width: 100%;
+      background: black;
+    }
+
+    .controls {
+      position: absolute;
+      bottom: 30px;
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .controls button,
+    .controls select {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 0 5px;
+    }
+
+    .controls .duration {
+      flex: 1;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .title-bar {
+      position: absolute;
+      top: 10px;
+      left: 20px;
+      font-size: 20px;
+      background: rgba(0,0,0,0.6);
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+
+    .locked-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .locked-overlay.show {
+      display: flex;
+    }
+
+    .locked-overlay button {
+      font-size: 30px;
+      background: transparent;
+      border: 2px solid white;
+      border-radius: 50%;
+      padding: 10px 14px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div id="player-container">
+  <div class="title-bar" id="video-title"></div>
+
+  <video id="video" controls>
+    <source id="src" src="" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="controls">
+    <button id="lock-btn">🔒</button>
+    <button id="playpause">⏯</button>
+    <div class="duration" id="time-display">00:00 / 00:00</div>
+    <button id="cc-btn">💬</button>
+    <button id="audio-btn">🔈</button>
+    <select id="quality-select">
+      <option value="1080">1080p</option>
+      <option value="720">720p</option>
+      <option value="480">480p</option>
+    </select>
+  </div>
+
+  <div class="locked-overlay" id="lock-screen">
+    <button id="unlock-btn">🔓</button>
+  </div>
+</div>
+
 <script>
-  const urlParams = new URLSearchParams(window.location.search);
-  const video = urlParams.get('video');
+  const urlParams = new URLSearchParams(location.search);
+  const title = decodeURIComponent(urlParams.get('title') || "Untitled");
+  const video = decodeURIComponent(urlParams.get('video') || "");
+
+  const videoElem = document.getElementById("video");
+  const srcElem = document.getElementById("src");
+  const titleElem = document.getElementById("video-title");
+  const timeDisplay = document.getElementById("time-display");
+
+  // Set video source and title
   if (video) {
-    document.getElementById("video-source").src = video;
-    document.getElementById("video-player").load();
+    srcElem.src = video;
+    videoElem.load();
   }
+  titleElem.textContent = title;
+
+  // Play/Pause button
+  document.getElementById("playpause").onclick = () => {
+    if (videoElem.paused) {
+      videoElem.play();
+    } else {
+      videoElem.pause();
+    }
+  };
+
+  // Lock screen logic
+  const lockScreen = document.getElementById("lock-screen");
+  document.getElementById("lock-btn").onclick = () => {
+    lockScreen.classList.add("show");
+  };
+  document.getElementById("unlock-btn").onclick = () => {
+    lockScreen.classList.remove("show");
+  };
+
+  // Time update
+  videoElem.ontimeupdate = () => {
+    const format = t => {
+      const m = Math.floor(t / 60).toString().padStart(2, '0');
+      const s = Math.floor(t % 60).toString().padStart(2, '0');
+      return `${m}:${s}`;
+    };
+    timeDisplay.textContent = `${format(videoElem.currentTime)} / ${format(videoElem.duration)}`;
+  };
+
+  // Quality switch logic (basic simulation)
+  document.getElementById("quality-select").onchange = (e) => {
+    const quality = e.target.value;
+    if (video.includes("archive.org")) {
+      let newUrl = video;
+      newUrl = newUrl.replace(/720P|480P|1080P/gi, `${quality}P`);
+      srcElem.src = newUrl;
+      videoElem.load();
+      videoElem.play();
+    }
+  };
+
+  // Placeholder for audio and CC
+  document.getElementById("cc-btn").onclick = () => {
+    alert("Caption toggling not implemented yet.");
+  };
+  document.getElementById("audio-btn").onclick = () => {
+    alert("Audio track switching not implemented yet.");
+  };
 </script>
+
+</body>
+</html>
