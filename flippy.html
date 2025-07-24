@@ -229,24 +229,16 @@
         }
 
         .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: linear-gradient(145deg, #FF6B6B, #FF4757);
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
+  position: absolute;
+  top: 80px;
+  right: 60px;
+  background: transparent;
+  border: none;
+  color: #b82929;
+  font-size: 22px;
+  cursor: pointer;
+}
+
 
         .close-btn:hover {
             transform: translateY(-2px) scale(1.1);
@@ -830,13 +822,23 @@
         // Initialize the game when page loads
         init();
 
-        // Outside click closes settings
-document.addEventListener("click", function (e) {
-  const modal = document.getElementById("settingsModal");
-  const content = document.querySelector(".settings-content");
+        // Show the settings modal
+function openSettings() {
+  document.getElementById('settingsModal').style.display = 'flex';
+}
 
-  if (modal.style.display === "block" && !content.contains(e.target)) {
-    modal.style.display = "none";
+// Hide the settings modal
+function closeSettings() {
+  document.getElementById('settingsModal').style.display = 'none';
+}
+
+// ❌ Close on corner X click
+document.getElementById('closeSettings').addEventListener('click', closeSettings);
+
+// ❌ Close on outside click
+document.getElementById('settingsModal').addEventListener('click', function(e) {
+  if (e.target === this) {
+    closeSettings();
   }
 });
 
