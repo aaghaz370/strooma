@@ -252,25 +252,35 @@
         }
         
         .btn {
-            padding: 12px 24px;
+            padding: 15px 25px;
             border: none;
             border-radius: 15px;
             font-family: inherit;
-            font-size: 1em;
+            font-size: 1.1em;
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
-        .btn:hover {
+        .btn:hover, .btn:focus {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            outline: none;
         }
         
         .btn:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         
         .settings-modal {
@@ -333,6 +343,10 @@
             position: relative;
             cursor: pointer;
             transition: all 0.3s;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
         
         .toggle.active {
@@ -452,10 +466,10 @@
             </div>
             
             <div class="controls">
-                <button class="btn" onclick="toggleGameMode()">⏱️ Timer Mode</button>
-                <button class="btn" onclick="openSettings()">⚙️ Settings</button>
-                <button class="btn" onclick="resetGame()">🔄 Reset</button>
-                <button class="btn" onclick="toggleSound()">🔊 Sound</button>
+                <button class="btn" id="gameModeBtn">⏱️ Timer Mode</button>
+                <button class="btn" id="settingsBtn">⚙️ Settings</button>
+                <button class="btn" id="resetBtn">🔄 Reset</button>
+                <button class="btn" id="soundBtn">🔊 Sound</button>
             </div>
         </div>
     </div>
@@ -463,27 +477,27 @@
     <!-- Settings Modal -->
     <div class="settings-modal" id="settingsModal">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeSettings()">×</button>
+            <button class="close-btn" id="closeSettingsBtn">×</button>
             <h2 style="color: white; margin-bottom: 30px; text-align: center;">⚙️ Settings</h2>
             
             <div class="setting-item">
                 <span>🔊 Sound Effects</span>
-                <div class="toggle active" id="soundToggle" onclick="toggleSoundFX()"></div>
+                <div class="toggle active" id="soundToggle"></div>
             </div>
             
             <div class="setting-item">
                 <span>🎵 Background Music</span>
-                <div class="toggle" id="musicToggle" onclick="toggleMusic()"></div>
+                <div class="toggle" id="musicToggle"></div>
             </div>
             
             <div class="setting-item">
                 <span>⛶ Fullscreen</span>
-                <button class="btn" onclick="toggleFullscreen()">Enter</button>
+                <button class="btn" id="fullscreenBtn">Enter</button>
             </div>
             
             <div class="setting-item">
                 <span>🎮 Game Mode</span>
-                <select class="btn" style="padding: 8px;" onchange="changeGameMode(this.value)">
+                <select class="btn" style="padding: 8px;" id="gameModeSelect">
                     <option value="timer">⏰ Timer Mode</option>
                     <option value="moves">🎯 Moves Mode</option>
                 </select>
@@ -491,7 +505,7 @@
             
             <div class="setting-item">
                 <span>📊 Difficulty</span>
-                <select class="btn" style="padding: 8px;" onchange="changeDifficulty(this.value)">
+                <select class="btn" style="padding: 8px;" id="difficultySelect">
                     <option value="easy">Easy</option>
                     <option value="normal" selected>Normal</option>
                     <option value="hard">Hard</option>
@@ -507,7 +521,7 @@
             <h2 id="gameOverTitle">🎉 Level Complete!</h2>
             <p id="gameOverMessage">Congratulations! You've completed the level!</p>
             <div class="score-value" id="finalScore">Score: 0</div>
-            <button class="btn" onclick="resetGame()" style="margin-top: 20px;">🎮 Play Again</button>
+            <button class="btn" id="playAgainBtn" style="margin-top: 20px;">🎮 Play Again</button>
         </div>
     </div>
     
@@ -1119,8 +1133,10 @@
             gameState.gameMode = gameState.gameMode === 'timer' ? 'moves' : 'timer';
             
             // Update button text
-            const button = event.target;
-            button.textContent = gameState.gameMode === 'timer' ? '🎯 Moves Mode' : '⏱️ Timer Mode';
+            const button = document.getElementById('gameModeBtn');
+            if (button) {
+                button.textContent = gameState.gameMode === 'timer' ? '🎯 Moves Mode' : '⏱️ Timer Mode';
+            }
             
             // Clear existing timer
             if (gameState.timerInterval) {
@@ -1251,20 +1267,20 @@
             e.preventDefault();
         }, { passive: false });
         
-        // Click outside modal to close
-        document.getElementById('settingsModal').addEventListener('click', (e) => {
-            if (e.target.id === 'settingsModal') {
-                closeSettings();
-            }
-        });
+        // Remove old event listeners that were causing issues
+        // Click outside modal to close - moved to setupEventListeners
         
-        document.getElementById('gameOverModal').addEventListener('click', (e) => {
-            if (e.target.id === 'gameOverModal') {
-                document.getElementById('gameOverModal').style.display = 'none';
+        // Prevent zoom on double tap - improved version
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
             }
-        });
+            lastTouchEnd = now;
+        }, false);
         
-        // Keyboard controls
+        // Improved keyboard controls
         document.addEventListener('keydown', (e) => {
             switch(e.key) {
                 case 'Escape':
@@ -1366,10 +1382,74 @@
             optimizePerformance();
             initGame();
             startHintSystem();
+            setupEventListeners();
             
             // Show daily bonus after a short delay
             setTimeout(showDailyBonus, 2000);
         });
+        
+        function setupEventListeners() {
+            // Button event listeners with proper mobile support
+            const gameModeBtn = document.getElementById('gameModeBtn');
+            const settingsBtn = document.getElementById('settingsBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const soundBtn = document.getElementById('soundBtn');
+            const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+            const playAgainBtn = document.getElementById('playAgainBtn');
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            const soundToggle = document.getElementById('soundToggle');
+            const musicToggle = document.getElementById('musicToggle');
+            const gameModeSelect = document.getElementById('gameModeSelect');
+            const difficultySelect = document.getElementById('difficultySelect');
+            
+            // Add both click and touch events for better mobile support
+            function addMobileClickListener(element, handler) {
+                if (!element) return;
+                
+                element.addEventListener('click', handler);
+                element.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    handler(e);
+                });
+                
+                // Prevent double-tap zoom
+                element.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                });
+            }
+            
+            addMobileClickListener(gameModeBtn, toggleGameMode);
+            addMobileClickListener(settingsBtn, openSettings);
+            addMobileClickListener(resetBtn, resetGame);
+            addMobileClickListener(soundBtn, toggleSound);
+            addMobileClickListener(closeSettingsBtn, closeSettings);
+            addMobileClickListener(playAgainBtn, resetGame);
+            addMobileClickListener(fullscreenBtn, toggleFullscreen);
+            addMobileClickListener(soundToggle, toggleSoundFX);
+            addMobileClickListener(musicToggle, toggleMusic);
+            
+            // Select elements
+            if (gameModeSelect) {
+                gameModeSelect.addEventListener('change', (e) => changeGameMode(e.target.value));
+            }
+            
+            if (difficultySelect) {
+                difficultySelect.addEventListener('change', (e) => changeDifficulty(e.target.value));
+            }
+            
+            // Modal click outside to close
+            document.getElementById('settingsModal').addEventListener('click', (e) => {
+                if (e.target.id === 'settingsModal') {
+                    closeSettings();
+                }
+            });
+            
+            document.getElementById('gameOverModal').addEventListener('click', (e) => {
+                if (e.target.id === 'gameOverModal') {
+                    document.getElementById('gameOverModal').style.display = 'none';
+                }
+            });
+        }
         
         // Auto-save periodically
         setInterval(saveGameState, 30000); // Save every 30 seconds
