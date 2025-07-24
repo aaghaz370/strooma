@@ -174,15 +174,62 @@
             align-items: center;
         }
         
+        .timer-warning {
+            color: #ff6b6b !important;
+            animation: pulse 0.5s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { opacity: 0.7; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1.05); }
+        }
+        
+        .level-progress {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #4ecdc4, #44a08d);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.5);
+        }
+        
+        .level-complete-effect {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            z-index: 1003;
+            animation: levelComplete 2s ease-out forwards;
+            pointer-events: none;
+        }
+        
+        @keyframes levelComplete {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+        }
+        
         .score-board {
             background: rgba(255,255,255,0.2);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.3);
             text-align: center;
             min-width: 150px;
+            font-size: 0.9em;
         }
         
         .score-value {
@@ -397,11 +444,15 @@
             <div class="score-board">
                 <div>🏆 Score</div>
                 <div class="score-value" id="score">0</div>
-                <div>🎯 Moves</div>
-                <div class="score-value" id="moves">30</div>
+                <div id="targetScoreDiv">🎯 Target: <span id="targetScore">500</span></div>
+                <div>⏰ Time</div>
+                <div class="score-value" id="timer">60</div>
+                <div>📊 Level</div>
+                <div class="score-value" id="level">1</div>
             </div>
             
             <div class="controls">
+                <button class="btn" onclick="toggleGameMode()">⏱️ Timer Mode</button>
                 <button class="btn" onclick="openSettings()">⚙️ Settings</button>
                 <button class="btn" onclick="resetGame()">🔄 Reset</button>
                 <button class="btn" onclick="toggleSound()">🔊 Sound</button>
@@ -431,11 +482,20 @@
             </div>
             
             <div class="setting-item">
+                <span>🎮 Game Mode</span>
+                <select class="btn" style="padding: 8px;" onchange="changeGameMode(this.value)">
+                    <option value="timer">⏰ Timer Mode</option>
+                    <option value="moves">🎯 Moves Mode</option>
+                </select>
+            </div>
+            
+            <div class="setting-item">
                 <span>📊 Difficulty</span>
                 <select class="btn" style="padding: 8px;" onchange="changeDifficulty(this.value)">
                     <option value="easy">Easy</option>
                     <option value="normal" selected>Normal</option>
                     <option value="hard">Hard</option>
+                    <option value="expert">Expert</option>
                 </select>
             </div>
         </div>
@@ -462,11 +522,16 @@
             board: [],
             score: 0,
             moves: 30,
+            timer: 60,
+            level: 1,
+            targetScore: 500,
             selectedCandy: null,
             soundEnabled: true,
             musicEnabled: false,
             difficulty: 'normal',
-            gameOver: false
+            gameMode: 'timer', // 'moves' or 'timer'
+            gameOver: false,
+            timerInterval: null
         };
         
         // Audio context for sound effects
@@ -502,8 +567,15 @@
             board.innerHTML = '';
             gameState.board = [];
             gameState.score = 0;
-            gameState.moves = 30;
             gameState.gameOver = false;
+            
+            // Clear any existing timer
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+            
+            // Set difficulty parameters
+            setDifficultyParams();
             
             // Create 8x8 grid
             for (let row = 0; row < 8; row++) {
@@ -517,6 +589,60 @@
             
             updateDisplay();
             removeInitialMatches();
+            
+            // Start timer if in timer mode
+            if (gameState.gameMode === 'timer') {
+                startTimer();
+            }
+        }
+        
+        function setDifficultyParams() {
+            switch(gameState.difficulty) {
+                case 'easy':
+                    gameState.timer = gameState.gameMode === 'timer' ? 90 : 0;
+                    gameState.moves = gameState.gameMode === 'moves' ? 50 : Infinity;
+                    gameState.targetScore = 300 + (gameState.level - 1) * 200;
+                    break;
+                case 'normal':
+                    gameState.timer = gameState.gameMode === 'timer' ? 60 : 0;
+                    gameState.moves = gameState.gameMode === 'moves' ? 35 : Infinity;
+                    gameState.targetScore = 500 + (gameState.level - 1) * 300;
+                    break;
+                case 'hard':
+                    gameState.timer = gameState.gameMode === 'timer' ? 45 : 0;
+                    gameState.moves = gameState.gameMode === 'moves' ? 25 : Infinity;
+                    gameState.targetScore = 800 + (gameState.level - 1) * 400;
+                    break;
+                case 'expert':
+                    gameState.timer = gameState.gameMode === 'timer' ? 30 : 0;
+                    gameState.moves = gameState.gameMode === 'moves' ? 20 : Infinity;
+                    gameState.targetScore = 1200 + (gameState.level - 1) * 500;
+                    break;
+            }
+        }
+        
+        function startTimer() {
+            gameState.timerInterval = setInterval(() => {
+                gameState.timer--;
+                updateDisplay();
+                
+                // Warning effect when time is low
+                const timerElement = document.getElementById('timer');
+                if (gameState.timer <= 10) {
+                    timerElement.classList.add('timer-warning');
+                    if (gameState.timer <= 5) {
+                        playSound(800, 0.1, 'triangle');
+                    }
+                } else {
+                    timerElement.classList.remove('timer-warning');
+                }
+                
+                if (gameState.timer <= 0) {
+                    clearInterval(gameState.timerInterval);
+                    gameState.gameOver = true;
+                    checkGameEnd();
+                }
+            }, 1000);
         }
         
         function createCandy(row, col) {
@@ -606,7 +732,9 @@
                 // Check for matches after swap
                 const matches = findMatches();
                 if (matches.length > 0) {
-                    gameState.moves--;
+                    if (gameState.gameMode === 'moves') {
+                        gameState.moves--;
+                    }
                     updateDisplay();
                     processMatches(matches);
                     playSound(660, 0.2, 'triangle');
@@ -788,13 +916,66 @@
         }
         
         function checkGameEnd() {
-            if (gameState.moves <= 0) {
+            if (gameState.score >= gameState.targetScore) {
+                // Level Complete!
+                gameState.gameOver = true;
+                gameState.level++;
+                showLevelComplete();
+            } else if ((gameState.gameMode === 'moves' && gameState.moves <= 0) || 
+                      (gameState.gameMode === 'timer' && gameState.timer <= 0)) {
+                // Game Over
                 gameState.gameOver = true;
                 showGameOver(false);
-            } else if (gameState.score >= 1000) {
-                gameState.gameOver = true;
-                showGameOver(true);
             }
+        }
+        
+        function showLevelComplete() {
+            // Clear timer
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+            
+            // Show level complete effect
+            const levelEffect = document.createElement('div');
+            levelEffect.className = 'level-complete-effect';
+            levelEffect.innerHTML = `🎉 LEVEL ${gameState.level - 1} COMPLETE! 🎉`;
+            document.body.appendChild(levelEffect);
+            
+            setTimeout(() => {
+                levelEffect.remove();
+                
+                // Start next level after celebration
+                setTimeout(() => {
+                    initGame();
+                    showLevelStartMessage();
+                }, 1000);
+            }, 2000);
+            
+            createCelebration();
+            playLevelCompleteSound();
+        }
+        
+        function showLevelStartMessage() {
+            const levelStart = document.createElement('div');
+            levelStart.className = 'level-complete-effect';
+            levelStart.innerHTML = `🚀 LEVEL ${gameState.level} START! 🚀<br><small>Target: ${gameState.targetScore} points</small>`;
+            document.body.appendChild(levelStart);
+            
+            setTimeout(() => {
+                levelStart.remove();
+            }, 2000);
+            
+            playSound(660, 0.3, 'triangle');
+        }
+        
+        function playLevelCompleteSound() {
+            // Victory melody
+            const notes = [523, 659, 784, 1047]; // C, E, G, C
+            notes.forEach((note, index) => {
+                setTimeout(() => {
+                    playSound(note, 0.4, 'triangle');
+                }, index * 200);
+            });
         }
         
         function showGameOver(won) {
@@ -842,12 +1023,57 @@
         
         function updateDisplay() {
             document.getElementById('score').textContent = gameState.score;
-            document.getElementById('moves').textContent = gameState.moves;
+            document.getElementById('targetScore').textContent = gameState.targetScore;
+            document.getElementById('level').textContent = gameState.level;
+            
+            if (gameState.gameMode === 'timer') {
+                document.getElementById('timer').textContent = gameState.timer;
+                document.getElementById('targetScoreDiv').style.display = 'block';
+                // Hide moves display in timer mode
+                const timerDiv = document.getElementById('timer').parentElement;
+                timerDiv.style.display = 'block';
+            } else {
+                document.getElementById('timer').textContent = gameState.moves;
+                document.getElementById('timer').parentElement.previousElementSibling.textContent = '🎯 Moves';
+                document.getElementById('targetScoreDiv').style.display = 'block';
+            }
+            
+            // Update progress bar
+            updateProgressBar();
             
             // Animate score update
             const scoreElement = document.getElementById('score');
             scoreElement.style.animation = 'none';
             setTimeout(() => scoreElement.style.animation = 'countUp 0.5s ease-out', 10);
+        }
+        
+        function updateProgressBar() {
+            let progressBar = document.querySelector('.progress-bar');
+            if (!progressBar) {
+                // Create progress bar if it doesn't exist
+                const scoreBoard = document.querySelector('.score-board');
+                const progressContainer = document.createElement('div');
+                progressContainer.className = 'level-progress';
+                progressBar = document.createElement('div');
+                progressBar.className = 'progress-bar';
+                progressContainer.appendChild(progressBar);
+                scoreBoard.appendChild(progressContainer);
+            }
+            
+            const progress = Math.min((gameState.score / gameState.targetScore) * 100, 100);
+            progressBar.style.width = progress + '%';
+            
+            // Change color based on progress
+            if (progress >= 75) {
+                progressBar.style.background = 'linear-gradient(90deg, #4ecdc4, #44a08d)';
+                progressBar.style.boxShadow = '0 0 15px rgba(78, 205, 196, 0.7)';
+            } else if (progress >= 50) {
+                progressBar.style.background = 'linear-gradient(90deg, #f9ca24, #f0932b)';
+                progressBar.style.boxShadow = '0 0 15px rgba(249, 202, 36, 0.7)';
+            } else {
+                progressBar.style.background = 'linear-gradient(90deg, #ff6b6b, #ee5a52)';
+                progressBar.style.boxShadow = '0 0 15px rgba(255, 107, 107, 0.7)';
+            }
         }
         
         // Settings Functions
@@ -889,29 +1115,57 @@
             }
         }
         
+        function toggleGameMode() {
+            gameState.gameMode = gameState.gameMode === 'timer' ? 'moves' : 'timer';
+            
+            // Update button text
+            const button = event.target;
+            button.textContent = gameState.gameMode === 'timer' ? '🎯 Moves Mode' : '⏱️ Timer Mode';
+            
+            // Clear existing timer
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+            
+            resetGame();
+            playSound(550, 0.2);
+        }
+        
+        function changeGameMode(mode) {
+            gameState.gameMode = mode;
+            
+            // Clear existing timer
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+            
+            resetGame();
+        }
+        
         function changeDifficulty(difficulty) {
             gameState.difficulty = difficulty;
             
-            // Adjust game parameters based on difficulty
-            switch(difficulty) {
-                case 'easy':
-                    gameState.moves = 40;
-                    break;
-                case 'normal':
-                    gameState.moves = 30;
-                    break;
-                case 'hard':
-                    gameState.moves = 20;
-                    break;
+            // Clear existing timer
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
             }
             
-            updateDisplay();
+            resetGame();
             playSound(550, 0.1);
         }
         
         function resetGame() {
             document.getElementById('gameOverModal').style.display = 'none';
             document.getElementById('celebration').innerHTML = '';
+            
+            // Clear timer
+            if (gameState.timerInterval) {
+                clearInterval(gameState.timerInterval);
+            }
+            
+            // Reset to level 1 but keep difficulty and mode settings
+            gameState.level = 1;
+            
             initGame();
             playSound(880, 0.2);
         }
