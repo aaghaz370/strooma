@@ -571,6 +571,9 @@
                     <option value="light">Light Mode</option>
                 </select>
             </div>
+
+            <button onclick="toggleFullScreen()" title="Toggle Fullscreen" style="font-size: 20px; background: none; border: none; color: white; cursor: pointer;"> ⛶</button>
+
             
             <div class="action-buttons">
                 <button class="btn btn-secondary" onclick="resetGame()">Reset Game</button>
@@ -1143,10 +1146,6 @@
         });
 
 
-
-
-
-
         
   let touchStartX = null, touchStartY = null;
 
@@ -1175,6 +1174,21 @@
 
     touchStartX = touchStartY = null;
   }, false);
+
+
+
+
+
+  
+  function toggleFullScreen() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch((err) => {
+        alert(`Error attempting fullscreen: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  }
 
 
     </script>
