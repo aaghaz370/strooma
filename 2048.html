@@ -1141,6 +1141,42 @@
             const bestScore = localStorage.getItem('bestScore') || 0;
             document.getElementById('bestScore').textContent = bestScore;
         });
+
+
+
+
+
+
+        
+  let touchStartX = null, touchStartY = null;
+
+  document.addEventListener("touchstart", function(e) {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }
+  }, false);
+
+  document.addEventListener("touchend", function(e) {
+    if (!touchStartX || !touchStartY) return;
+
+    let touchEndX = e.changedTouches[0].clientX;
+    let touchEndY = e.changedTouches[0].clientY;
+    let dx = touchEndX - touchStartX;
+    let dy = touchEndY - touchStartY;
+
+    if (Math.abs(dx) > Math.abs(dy)) {
+      if (dx > 30) document.dispatchEvent(new KeyboardEvent("keydown", {key: "ArrowRight"}));
+      else if (dx < -30) document.dispatchEvent(new KeyboardEvent("keydown", {key: "ArrowLeft"}));
+    } else {
+      if (dy > 30) document.dispatchEvent(new KeyboardEvent("keydown", {key: "ArrowDown"}));
+      else if (dy < -30) document.dispatchEvent(new KeyboardEvent("keydown", {key: "ArrowUp"}));
+    }
+
+    touchStartX = touchStartY = null;
+  }, false);
+
+
     </script>
 </body>
 </html>
