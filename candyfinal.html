@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Candy Crush Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow: hidden;
+            animation: backgroundShift 10s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+            100% { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 10px;
+            position: relative;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 15px 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); }
+            100% { box-shadow: 0 4px 25px rgba(255, 107, 107, 0.7); }
+        }
+
+        .vs-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .score-panel {
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .score {
+            font-size: 28px;
+            animation: scoreFlip 0.5s ease-in-out;
+        }
+
+        @keyframes scoreFlip {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(0deg); }
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 15px;
+            color: white;
+            font-weight: bold;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 10px 20px;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 15px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 100%;
+            aspect-ratio: 1;
+        }
+
+        .cell {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cell:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .cell:hover:before {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .cell.selected {
+            transform: scale(1.1);
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+            z-index: 2;
+        }
+
+        .cell.matching {
+            animation: explode 0.6s ease-out forwards;
+            z-index: 3;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.5); opacity: 0.8; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        .cell.falling {
+            animation: fall 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) scale(0.8); opacity: 0; }
+            80% { transform: translateY(5px) scale(1.1); opacity: 1; }
+            100% { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .candy {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .candy:before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            width: 30%;
+            height: 30%;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            filter: blur(3px);
+        }
+
+        .candy-red { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .candy-blue { background: linear-gradient(135deg, #3498db, #2980b9); }
+        .candy-green { background: linear-gradient(135deg, #27ae60, #229954); }
+        .candy-yellow { background: linear-gradient(135deg, #f1c40f, #f39c12); }
+        .candy-purple { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
+        .candy-orange { background: linear-gradient(135deg, #e67e22, #d35400); }
+        .candy-pink { background: linear-gradient(135deg, #e91e63, #ad1457); }
+
+        .special-candy {
+            animation: specialPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes specialPulse {
+            0%, 100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); }
+            50% { box-shadow: 0 8px 30px rgba(255, 215, 0, 0.8); }
+        }
+
+        .settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg) scale(1.1);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .settings-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .settings-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .settings-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            max-width: 350px;
+            width: 90%;
+            transform: scale(0.8) rotateY(20deg);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .settings-modal.active .settings-card {
+            transform: scale(1) rotateY(0deg);
+        }
+
+        .settings-title {
+            text-align: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .setting-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            color: white;
+            font-weight: 600;
+        }
+
+        .toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle.active {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .toggle.active .toggle-slider {
+            transform: translateX(30px);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: white;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 0, 0, 0.5);
+            transform: scale(1.1);
+        }
+
+        .game-over-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .game-over-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .game-over-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transform: scale(0.8);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .game-over-modal.active .game-over-card {
+            transform: scale(1);
+        }
+
+        .game-over-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 25px;
+            padding: 15px 30px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .hint {
+            position: absolute;
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            animation: hintPulse 1.5s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes hintPulse {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .combo-text {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            z-index: 1000;
+            animation: comboShow 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes comboShow {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @media (max-width: 480px) {
+            .game-container {
+                padding: 5px;
+            }
+            
+            .header {
+                padding: 10px 15px;
+                margin-bottom: 10px;
+            }
+            
+            .board {
+                padding: 10px;
+                max-width: 350px;
+            }
+            
+            .candy {
+                font-size: 16px;
+            }
+            
+            .settings-card {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <div class="avatar">👤</div>
+            <div class="vs-text">VS</div>
+            <div class="score-panel">
+                <div class="score" id="score">0</div>
+                <div>Score</div>
+            </div>
+        </div>
+        
+        <div class="game-info">
+            <div id="moves-display">Moves: 30</div>
+            <div id="timer-display" style="display: none;">Time: 60s</div>
+            <div id="target-display">Target: 1000</div>
+        </div>
+        
+        <div class="board" id="board"></div>
+    </div>
+
+    <div class="settings-btn" id="settings-btn">⚙️</div>
+
+    <div class="settings-modal" id="settings-modal">
+        <div class="settings-card">
+            <div class="close-btn" id="close-settings">×</div>
+            <div class="settings-title">Game Settings</div>
+            
+            <div class="setting-row">
+                <span>Game Mode</span>
+                <div class="toggle" id="game-mode-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <span>Difficulty</span>
+                <select id="difficulty-select" style="background: rgba(255,255,255,0.2); border: none; border-radius: 10px; padding: 5px 10px; color: white;">
+                    <option value="easy">Easy</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="hard">Hard</option>
+                </select>
+            </div>
+            
+            <div class="setting-row">
+                <span>Sound Effects</span>
+                <div class="toggle active" id="sound-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <span>Background Music</span>
+                <div class="toggle active" id="music-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <div class="setting-row">
+                <span>Fullscreen</span>
+                <div class="toggle" id="fullscreen-toggle">
+                    <div class="toggle-slider"></div>
+                </div>
+            </div>
+            
+            <button class="btn" id="reset-game">Reset Game</button>
+        </div>
+    </div>
+
+    <div class="game-over-modal" id="game-over-modal">
+        <div class="game-over-card">
+            <div class="game-over-title" id="game-over-title">Game Over!</div>
+            <div id="final-score">Final Score: 0</div>
+            <button class="btn" id="play-again">Play Again</button>
+            <button class="btn" id="back-to-menu">Settings</button>
+        </div>
+    </div>
+
+    <script>
+        class CandyCrushGame {
+            constructor() {
+                this.board = [];
+                this.boardSize = 8;
+                this.candyTypes = ['🍭', '🍬', '🍫', '🧁', '🍪'];
+                this.selectedCell = null;
+                this.score = 0;
+                this.moves = 30;
+                this.timeLeft = 60;
+                this.target = 1000;
+                this.gameMode = 'moves'; // 'moves' or 'timer'
+                this.difficulty = 'medium';
+                this.isGameRunning = true;
+                this.combo = 0;
+                this.hintTimeout = null;
+                this.soundEnabled = true;
+                this.musicEnabled = true;
+                
+                this.difficultySettings = {
+                    easy: { types: 4, moves: 50, time: 120, target: 800 },
+                    medium: { types: 5, moves: 30, time: 90, target: 1000 },
+                    hard: { types: 6, moves: 20, time: 60, target: 1500 }
+                };
+                
+                this.init();
+            }
+
+            init() {
+                this.createBoard();
+                this.setupEventListeners();
+                this.updateDisplay();
+                this.scheduleHint();
+                this.loadSettings();
+                
+                // Start timer if in timer mode
+                if (this.gameMode === 'timer') {
+                    this.startTimer();
+                }
+            }
+
+            loadSettings() {
+                const saved = localStorage.getItem('candyCrushSettings');
+                if (saved) {
+                    const settings = JSON.parse(saved);
+                    this.gameMode = settings.gameMode || 'moves';
+                    this.difficulty = settings.difficulty || 'medium';
+                    this.soundEnabled = settings.soundEnabled !== false;
+                    this.musicEnabled = settings.musicEnabled !== false;
+                    this.updateSettingsUI();
+                }
+                this.applyDifficulty();
+            }
+
+            saveSettings() {
+                const settings = {
+                    gameMode: this.gameMode,
+                    difficulty: this.difficulty,
+                    soundEnabled: this.soundEnabled,
+                    musicEnabled: this.musicEnabled
+                };
+                localStorage.setItem('candyCrushSettings', JSON.stringify(settings));
+            }
+
+            updateSettingsUI() {
+                document.getElementById('game-mode-toggle').classList.toggle('active', this.gameMode === 'timer');
+                document.getElementById('difficulty-select').value = this.difficulty;
+                document.getElementById('sound-toggle').classList.toggle('active', this.soundEnabled);
+                document.getElementById('music-toggle').classList.toggle('active', this.musicEnabled);
+            }
+
+            applyDifficulty() {
+                const settings = this.difficultySettings[this.difficulty];
+                this.candyTypes = ['🍭', '🍬', '🍫', '🧁', '🍪', '🍰', '🎂'].slice(0, settings.types);
+                this.moves = settings.moves;
+                this.timeLeft = settings.time;
+                this.target = settings.target;
+                this.updateDisplay();
+            }
+
+            createBoard() {
+                const boardElement = document.getElementById('board');
+                boardElement.innerHTML = '';
+                this.board = [];
+
+                for (let row = 0; row < this.boardSize; row++) {
+                    this.board[row] = [];
+                    for (let col = 0; col < this.boardSize; col++) {
+                        let candy;
+                        do {
+                            candy = this.candyTypes[Math.floor(Math.random() * this.candyTypes.length)];
+                        } while (this.wouldCreateMatch(row, col, candy));
+                        
+                        this.board[row][col] = candy;
+                        
+                        const cell = document.createElement('div');
+                        cell.className = 'cell';
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        
+                        const candyElement = document.createElement('div');
+                        candyElement.className = `candy candy-${this.getCandyColor(candy)}`;
+                        candyElement.textContent = candy;
+                        
+                        cell.appendChild(candyElement);
+                        boardElement.appendChild(cell);
+                    }
+                }
+            }
+
+            wouldCreateMatch(row, col, candy) {
+                // Check horizontal
+                let count = 1;
+                if (col > 0 && this.board[row][col-1] === candy) count++;
+                if (col > 1 && this.board[row][col-2] === candy) count++;
+                if (count >= 3) return true;
+
+                // Check vertical
+                count = 1;
+                if (row > 0 && this.board[row-1] && this.board[row-1][col] === candy) count++;
+                if (row > 1 && this.board[row-2] && this.board[row-2][col] === candy) count++;
+                if (count >= 3) return true;
+
+                return false;
+            }
+
+            getCandyColor(candy) {
+                const colors = {
+                    '🍭': 'red',
+                    '🍬': 'blue', 
+                    '🍫': 'orange',
+                    '🧁': 'pink',
+                    '🍪': 'yellow',
+                    '🍰': 'purple',
+                    '🎂': 'green'
+                };
+                return colors[candy] || 'red';
+            }
+
+            setupEventListeners() {
+                // Touch and click events for board
+                const board = document.getElementById('board');
+                let startTouch = null;
+
+                board.addEventListener('mousedown', (e) => this.handleStart(e));
+                board.addEventListener('mousemove', (e) => this.handleMove(e));
+                board.addEventListener('mouseup', (e) => this.handleEnd(e));
+                
+                board.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    startTouch = e.touches[0];
+                    this.handleStart(e.touches[0]);
+                });
+                
+                board.addEventListener('touchmove', (e) => {
+                    e.preventDefault();
+                    if (startTouch) this.handleMove(e.touches[0]);
+                });
+                
+                board.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    if (startTouch) this.handleEnd(startTouch);
+                    startTouch = null;
+                });
+
+                // Settings
+                document.getElementById('settings-btn').addEventListener('click', () => {
+                    document.getElementById('settings-modal').classList.add('active');
+                });
+
+                document.getElementById('close-settings').addEventListener('click', () => {
+                    document.getElementById('settings-modal').classList.remove('active');
+                });
+
+                document.getElementById('settings-modal').addEventListener('click', (e) => {
+                    if (e.target.id === 'settings-modal') {
+                        document.getElementById('settings-modal').classList.remove('active');
+                    }
+                });
+
+                // Settings toggles
+                document.getElementById('game-mode-toggle').addEventListener('click', () => {
+                    this.gameMode = this.gameMode === 'moves' ? 'timer' : 'moves';
+                    this.applyDifficulty();
+                    this.updateDisplay();
+                    this.saveSettings();
+                    this.updateSettingsUI();
+                    
+                    // Start timer if switching to timer mode
+                    if (this.gameMode === 'timer' && this.isGameRunning) {
+                        this.startTimer();
+                    } else if (this.timerInterval) {
+                        clearInterval(this.timerInterval);
+                    }
+                });
+
+                document.getElementById('difficulty-select').addEventListener('change', (e) => {
+                    this.difficulty = e.target.value;
+                    this.applyDifficulty();
+                    this.resetGame();
+                    this.saveSettings();
+                });
+
+                document.getElementById('sound-toggle').addEventListener('click', () => {
+                    this.soundEnabled = !this.soundEnabled;
+                    this.saveSettings();
+                    this.updateSettingsUI();
+                });
+
+                document.getElementById('music-toggle').addEventListener('click', () => {
+                    this.musicEnabled = !this.musicEnabled;
+                    this.saveSettings();
+                    this.updateSettingsUI();
+                });
+
+                document.getElementById('fullscreen-toggle').addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen();
+                        document.getElementById('fullscreen-toggle').classList.add('active');
+                    } else {
+                        document.exitFullscreen();
+                        document.getElementById('fullscreen-toggle').classList.remove('active');
+                    }
+                });
+
+                document.getElementById('reset-game').addEventListener('click', () => {
+                    this.resetGame();
+                    document.getElementById('settings-modal').classList.remove('active');
+                });
+
+                document.getElementById('play-again').addEventListener('click', () => {
+                    this.resetGame();
+                    document.getElementById('game-over-modal').classList.remove('active');
+                });
+
+                document.getElementById('back-to-menu').addEventListener('click', () => {
+                    document.getElementById('game-over-modal').classList.remove('active');
+                    document.getElementById('settings-modal').classList.add('active');
+                });
+
+                // Timer mode
+                if (this.gameMode === 'timer') {
+                    this.startTimer();
+                }
+            }
+
+            handleStart(e) {
+                if (!this.isGameRunning) return;
+                
+                const cell = e.target.closest('.cell');
+                if (!cell) return;
+
+                this.clearSelection();
+                this.selectedCell = cell;
+                cell.classList.add('selected');
+                this.playSound('tick');
+            }
+
+            handleMove(e) {
+                // Handle swipe detection for mobile
+            }
+
+            handleEnd(e) {
+                if (!this.isGameRunning || !this.selectedCell) return;
+
+                const cell = e.target.closest('.cell');
+                if (!cell || cell === this.selectedCell) return;
+
+                const row1 = parseInt(this.selectedCell.dataset.row);
+                const col1 = parseInt(this.selectedCell.dataset.col);
+                const row2 = parseInt(cell.dataset.row);
+                const col2 = parseInt(cell.dataset.col);
+
+                // Check if cells are adjacent
+                const isAdjacent = (Math.abs(row1 - row2) === 1 && col1 === col2) ||
+                                 (Math.abs(col1 - col2) === 1 && row1 === row2);
+
+                if (isAdjacent) {
+                    this.swapCandies(row1, col1, row2, col2);
+                }
+
+                this.clearSelection();
+                this.clearHint();
+            }
+
+            clearSelection() {
+                if (this.selectedCell) {
+                    this.selectedCell.classList.remove('selected');
+                    this.selectedCell = null;
+                }
+            }
+
+            swapCandies(row1, col1, row2, col2) {
+                // Swap in board array
+                const temp = this.board[row1][col1];
+                this.board[row1][col1] = this.board[row2][col2];
+                this.board[row2][col2] = temp;
+
+                // Update visual
+                this.updateBoardVisual();
+
+                // Check for matches
+                const matches = this.findMatches();
+                if (matches.length > 0) {
+                    this.processMatches(matches);
+                    if (this.gameMode === 'moves') {
+                        this.moves--;
+                        this.updateDisplay();
+                    }
+                } else {
+                    // Swap back if no matches
+                    this.board[row1][col1] = this.board[row2][col2];
+                    this.board[row2][col2] = temp;
+                    this.updateBoardVisual();
+                    this.playSound('error');
+                }
+
+                this.scheduleHint();
+                this.checkGameEnd();
+            }
+
+            updateBoardVisual() {
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => {
+                    const row = parseInt(cell.dataset.row);
+                    const col = parseInt(cell.dataset.col);
+                    const candy = cell.querySelector('.candy');
+                    const newCandy = this.board[row][col];
+                    
+                    candy.textContent = newCandy;
+                    candy.className = `candy candy-${this.getCandyColor(newCandy)}`;
+                });
+            }
+
+            findMatches() {
+                const matches = [];
+                const visited = new Set();
+
+                // Check horizontal matches
+                for (let row = 0; row < this.boardSize; row++) {
+                    let count = 1;
+                    let currentCandy = this.board[row][0];
+                    
+                    for (let col = 1; col < this.boardSize; col++) {
+                        if (this.board[row][col] === currentCandy) {
+                            count++;
+                        } else {
+                            if (count >= 3) {
+                                for (let i = col - count; i < col; i++) {
+                                    matches.push({row, col: i});
+                                }
+                            }
+                            count = 1;
+                            currentCandy = this.board[row][col];
+                        }
+                    }
+                    if (count >= 3) {
+                        for (let i = this.boardSize - count; i < this.boardSize; i++) {
+                            matches.push({row, col: i});
+                        }
+                    }
+                }
+
+                // Check vertical matches
+                for (let col = 0; col < this.boardSize; col++) {
+                    let count = 1;
+                    let currentCandy = this.board[0][col];
+                    
+                    for (let row = 1; row < this.boardSize; row++) {
+                        if (this.board[row][col] === currentCandy) {
+                            count++;
+                        } else {
+                            if (count >= 3) {
+                                for (let i = row - count; i < row; i++) {
+                                    matches.push({row: i, col});
+                                }
+                            }
+                            count = 1;
+                            currentCandy = this.board[row][col];
+                        }
+                    }
+                    if (count >= 3) {
+                        for (let i = this.boardSize - count; i < this.boardSize; i++) {
+                            matches.push({row: i, col});
+                        }
+                    }
+                }
+
+                return matches;
+            }
+
+            processMatches(matches) {
+                this.combo++;
+                
+                // Calculate score
+                let points = matches.length * 10;
+                if (matches.length >= 4) points += 25; // Special candy bonus
+                if (this.combo > 1) points *= this.combo; // Combo multiplier
+                
+                this.score += points;
+                this.updateScore();
+
+                // Show combo text
+                if (this.combo > 1) {
+                    this.showComboText(`${this.combo}x COMBO!`);
+                }
+
+                // Mark matching cells for animation
+                matches.forEach(match => {
+                    const cell = document.querySelector(`[data-row="${match.row}"][data-col="${match.col}"]`);
+                    if (cell) {
+                        cell.classList.add('matching');
+                    }
+                });
+
+                this.playSound('match');
+
+                // Remove matches and drop candies after animation
+                setTimeout(() => {
+                    this.removeMatches(matches);
+                    this.dropCandies();
+                }, 600);
+            }
+
+            removeMatches(matches) {
+                matches.forEach(match => {
+                    this.board[match.row][match.col] = null;
+                });
+            }
+
+            dropCandies() {
+                // Move existing candies down
+                for (let col = 0; col < this.boardSize; col++) {
+                    let writePos = this.boardSize - 1;
+                    
+                    for (let row = this.boardSize - 1; row >= 0; row--) {
+                        if (this.board[row][col] !== null) {
+                            if (writePos !== row) {
+                                this.board[writePos][col] = this.board[row][col];
+                                this.board[row][col] = null;
+                            }
+                            writePos--;
+                        }
+                    }
+
+                    // Fill empty spaces with new candies
+                    for (let row = 0; row <= writePos; row++) {
+                        this.board[row][col] = this.candyTypes[Math.floor(Math.random() * this.candyTypes.length)];
+                    }
+                }
+
+                // Update visual with falling animation
+                this.updateBoardWithAnimation();
+
+            // Check for new matches after a delay
+                setTimeout(() => {
+                    const newMatches = this.findMatches();
+                    if (newMatches.length > 0) {
+                        this.processMatches(newMatches);
+                    } else {
+                        this.combo = 0; // Reset combo
+                        this.checkGameEnd(); // Check win condition after all matches are processed
+                    }
+                }, 800);
+            }
+
+            updateBoardWithAnimation() {
+                const cells = document.querySelectorAll('.cell');
+                cells.forEach(cell => {
+                    cell.classList.remove('matching');
+                    
+                    const row = parseInt(cell.dataset.row);
+                    const col = parseInt(cell.dataset.col);
+                    const candy = cell.querySelector('.candy');
+                    const newCandy = this.board[row][col];
+                    
+                    if (candy.textContent !== newCandy) {
+                        cell.classList.add('falling');
+                        candy.textContent = newCandy;
+                        candy.className = `candy candy-${this.getCandyColor(newCandy)}`;
+                        
+                        setTimeout(() => {
+                            cell.classList.remove('falling');
+                        }, 800);
+                    }
+                });
+            }
+
+            updateScore() {
+                const scoreElement = document.getElementById('score');
+                scoreElement.classList.add('score');
+                scoreElement.textContent = this.score;
+                
+                // Trigger flip animation
+                setTimeout(() => {
+                    scoreElement.classList.remove('score');
+                }, 500);
+            }
+
+            showComboText(text) {
+                const comboElement = document.createElement('div');
+                comboElement.className = 'combo-text';
+                comboElement.textContent = text;
+                document.body.appendChild(comboElement);
+
+                setTimeout(() => {
+                    document.body.removeChild(comboElement);
+                }, 1500);
+            }
+
+            updateDisplay() {
+                document.getElementById('moves-display').style.display = this.gameMode === 'moves' ? 'block' : 'none';
+                document.getElementById('timer-display').style.display = this.gameMode === 'timer' ? 'block' : 'none';
+                
+                if (this.gameMode === 'moves') {
+                    document.getElementById('moves-display').textContent = `Moves: ${this.moves}`;
+                } else {
+                    document.getElementById('timer-display').textContent = `Time: ${this.timeLeft}s`;
+                }
+                
+                document.getElementById('target-display').textContent = `Target: ${this.target}`;
+            }
+
+            startTimer() {
+                if (this.gameMode !== 'timer') return;
+                
+                this.timerInterval = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateDisplay();
+                    
+                    if (this.timeLeft <= 0) {
+                        this.endGame();
+                    }
+                }, 1000);
+            }
+
+            scheduleHint() {
+                this.clearHint();
+                
+                if (!this.isGameRunning) return;
+                
+                this.hintTimeout = setTimeout(() => {
+                    this.showHint();
+                }, 5000);
+            }
+
+            showHint() {
+                const possibleMoves = this.findPossibleMoves();
+                if (possibleMoves.length > 0) {
+                    const move = possibleMoves[0];
+                    const cell1 = document.querySelector(`[data-row="${move.row1}"][data-col="${move.col1}"]`);
+                    const cell2 = document.querySelector(`[data-row="${move.row2}"][data-col="${move.col2}"]`);
+                    
+                    if (cell1 && cell2) {
+                        const hint1 = document.createElement('div');
+                        const hint2 = document.createElement('div');
+                        hint1.className = hint2.className = 'hint';
+                        
+                        const rect1 = cell1.getBoundingClientRect();
+                        const rect2 = cell2.getBoundingClientRect();
+                        
+                        hint1.style.left = rect1.left + 'px';
+                        hint1.style.top = rect1.top + 'px';
+                        hint1.style.width = rect1.width + 'px';
+                        hint1.style.height = rect1.height + 'px';
+                        
+                        hint2.style.left = rect2.left + 'px';
+                        hint2.style.top = rect2.top + 'px';
+                        hint2.style.width = rect2.width + 'px';
+                        hint2.style.height = rect2.height + 'px';
+                        
+                        document.body.appendChild(hint1);
+                        document.body.appendChild(hint2);
+                        
+                        this.currentHints = [hint1, hint2];
+                    }
+                }
+            }
+
+            findPossibleMoves() {
+                const moves = [];
+                
+                for (let row = 0; row < this.boardSize; row++) {
+                    for (let col = 0; col < this.boardSize; col++) {
+                        // Check right
+                        if (col < this.boardSize - 1) {
+                            if (this.wouldCreateMatchAfterSwap(row, col, row, col + 1)) {
+                                moves.push({row1: row, col1: col, row2: row, col2: col + 1});
+                            }
+                        }
+                        
+                        // Check down
+                        if (row < this.boardSize - 1) {
+                            if (this.wouldCreateMatchAfterSwap(row, col, row + 1, col)) {
+                                moves.push({row1: row, col1: col, row2: row + 1, col2: col});
+                            }
+                        }
+                    }
+                }
+                
+                return moves;
+            }
+
+            wouldCreateMatchAfterSwap(row1, col1, row2, col2) {
+                // Temporarily swap
+                const temp = this.board[row1][col1];
+                this.board[row1][col1] = this.board[row2][col2];
+                this.board[row2][col2] = temp;
+                
+                // Check for matches
+                const matches = this.findMatches();
+                const hasMatches = matches.length > 0;
+                
+                // Swap back
+                this.board[row2][col2] = this.board[row1][col1];
+                this.board[row1][col1] = temp;
+                
+                return hasMatches;
+            }
+
+            clearHint() {
+                if (this.hintTimeout) {
+                    clearTimeout(this.hintTimeout);
+                }
+                
+                if (this.currentHints) {
+                    this.currentHints.forEach(hint => {
+                        if (hint.parentNode) {
+                            hint.parentNode.removeChild(hint);
+                        }
+                    });
+                    this.currentHints = null;
+                }
+            }
+
+            checkGameEnd() {
+                if (!this.isGameRunning) return;
+                
+                let gameWon = false;
+                let gameOver = false;
+                
+                if (this.score >= this.target) {
+                    gameWon = true;
+                } else if (this.gameMode === 'moves' && this.moves <= 0) {
+                    gameOver = true;
+                } else if (this.gameMode === 'timer' && this.timeLeft <= 0) {
+                    gameOver = true;
+                }
+                
+                if (gameWon || gameOver) {
+                    this.endGame(gameWon);
+                }
+            }
+
+            endGame(won = false) {
+                this.isGameRunning = false;
+                this.clearHint();
+                
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                }
+                
+                document.getElementById('game-over-title').textContent = won ? 'Level Complete!' : 'Game Over!';
+                document.getElementById('final-score').textContent = `Final Score: ${this.score}`;
+                document.getElementById('game-over-modal').classList.add('active');
+                
+                if (won) {
+                    this.playSound('win');
+                    this.showCandyRain();
+                } else {
+                    this.playSound('lose');
+                }
+            }
+
+            showCandyRain() {
+                for (let i = 0; i < 20; i++) {
+                    setTimeout(() => {
+                        const candy = document.createElement('div');
+                        candy.style.position = 'fixed';
+                        candy.style.top = '-50px';
+                        candy.style.left = Math.random() * window.innerWidth + 'px';
+                        candy.style.fontSize = '30px';
+                        candy.style.zIndex = '9999';
+                        candy.style.pointerEvents = 'none';
+                        candy.textContent = this.candyTypes[Math.floor(Math.random() * this.candyTypes.length)];
+                        candy.style.animation = 'fall 3s linear forwards';
+                        
+                        document.body.appendChild(candy);
+                        
+                        setTimeout(() => {
+                            if (candy.parentNode) {
+                                candy.parentNode.removeChild(candy);
+                            }
+                        }, 3000);
+                    }, i * 100);
+                }
+            }
+
+            resetGame() {
+                this.isGameRunning = true;
+                this.score = 0;
+                this.combo = 0;
+                this.selectedCell = null;
+                
+                if (this.timerInterval) {
+                    clearInterval(this.timerInterval);
+                }
+                
+                this.applyDifficulty();
+                this.createBoard();
+                this.updateDisplay();
+                this.scheduleHint();
+                
+                if (this.gameMode === 'timer') {
+                    this.startTimer();
+                }
+                
+                this.clearHint();
+            }
+
+            playSound(type) {
+                if (!this.soundEnabled) return;
+                
+                // Create audio context for sound effects
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                switch (type) {
+                    case 'tick':
+                        oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                        break;
+                    case 'match':
+                        oscillator.frequency.setValueAtTime(600, audioContext.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(1200, audioContext.currentTime + 0.2);
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                        break;
+                    case 'error':
+                        oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+                        break;
+                    case 'win':
+                        oscillator.frequency.setValueAtTime(523, audioContext.currentTime);
+                        oscillator.frequency.setValueAtTime(659, audioContext.currentTime + 0.2);
+                        oscillator.frequency.setValueAtTime(784, audioContext.currentTime + 0.4);
+                        gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.6);
+                        break;
+                    case 'lose':
+                        oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+                        oscillator.frequency.exponentialRampToValueAtTime(150, audioContext.currentTime + 0.5);
+                        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                        break;
+                }
+                
+                oscillator.start(audioContext.currentTime);
+                oscillator.stop(audioContext.currentTime + 0.6);
+            }
+        }
+
+        // Initialize game when page loads
+        window.addEventListener('load', () => {
+            new CandyCrushGame();
+        });
+
+        // Prevent zoom on double tap for mobile
+        let lastTouchEnd = 0;
+        document.addEventListener('touchend', function (event) {
+            const now = (new Date()).getTime();
+            if (now - lastTouchEnd <= 300) {
+                event.preventDefault();
+            }
+            lastTouchEnd = now;
+        }, false);
+
+        // Handle fullscreen change
+        document.addEventListener('fullscreenchange', () => {
+            const toggle = document.getElementById('fullscreen-toggle');
+            toggle.classList.toggle('active', !!document.fullscreenElement);
+        });
+    </script>
+</body>
+</html>
